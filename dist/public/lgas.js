@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lgas = {
-    Abuja: ["Abuja", "Kwali", "Kuje", "Gwagwalada", "Bwari", "Abaji"],
+    "FCT - Abuja": ["Abuja", "Kwali", "Kuje", "Gwagwalada", "Bwari", "Abaji"],
     Abia: [
         "Aba North",
         "Aba South",
@@ -47,7 +47,7 @@ const lgas = {
         "Yola North",
         "Yola South",
     ],
-    AkwaIbom: [
+    "Akwa Ibom": [
         "Abak",
         "Eastern-Obolo",
         "Eket",
@@ -187,7 +187,7 @@ const lgas = {
         "Nganzai",
         "Shani",
     ],
-    CrossRiver: [
+    "Cross River": [
         "Abi",
         "Akamkpa",
         "Akpabuyo",
@@ -568,7 +568,7 @@ const lgas = {
         "Surulere",
         "Yewa-South",
     ],
-    Nassarawa: [
+    Nasarawa: [
         "Akwanga",
         "Awe",
         "Doma",
