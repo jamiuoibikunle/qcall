@@ -22,6 +22,14 @@ const migrateDB = {
                 .json({ status: false, message: "Error while creating table" });
         return res.status(200).json({ status: true, message: "Table created" });
     }),
+    lgas: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        const result = yield database_1.default.query("CREATE TABLE lgas (ID SERIAL PRIMARY KEY, state VARCHAR(255) NULL, name VARCHAR(255) NOT NULL UNIQUE, chairman VARCHAR(255), vice_chairman VARCHAR(255), secretary VARCHAR(255), created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name))");
+        if (!result)
+            return res
+                .status(400)
+                .json({ status: false, message: "Error while creating table" });
+        return res.status(200).json({ status: true, message: "Table created" });
+    }),
     police: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const result = yield database_1.default.query("CREATE TABLE police (ID SERIAL PRIMARY KEY, phone_number VARCHAR(255) NOT NULL, state_id INT NOT NULL, created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state_id) REFERENCES states(id))");
         if (!result)
