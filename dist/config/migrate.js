@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = __importDefault(require("./database"));
 const migrateDB = {
     states: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield database_1.default.query("CREATE TABLE states (ID SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL UNIQUE, deputy_governor VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, created_at TIMESTAMP DEFAULT NOW())");
+        const result = yield database_1.default.query("CREATE TABLE states (ID SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL UNIQUE, governor VARCHAR(255), deputy_governor VARCHAR(255), created_at TIMESTAMP DEFAULT NOW())");
         if (!result)
             return res
                 .status(400)

@@ -4,7 +4,7 @@ import pool from "./database";
 const migrateDB = {
   states: async (req: Request, res: Response) => {
     const result = await pool.query(
-      "CREATE TABLE states (ID SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL UNIQUE, deputy_governor VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, created_at TIMESTAMP DEFAULT NOW())"
+      "CREATE TABLE states (ID SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL UNIQUE, governor VARCHAR(255), deputy_governor VARCHAR(255), created_at TIMESTAMP DEFAULT NOW())"
     );
 
     if (!result)
