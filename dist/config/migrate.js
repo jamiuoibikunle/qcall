@@ -31,4 +31,4 @@ const migrateDB = {
         return res.status(200).json({ status: true, message: "Table created" });
     }),
 };
-module.exports = migrateDB;
+exports.default = migrateDB;

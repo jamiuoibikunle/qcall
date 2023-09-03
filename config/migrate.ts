@@ -27,4 +27,4 @@ const migrateDB = {
   },
 };
 
-module.exports = migrateDB;
+export default migrateDB;
