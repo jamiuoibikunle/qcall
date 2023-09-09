@@ -5,5 +5,6 @@ const router = Router();
 
 router.post("/state", migrateDB.states);
 router.post("/lgas", migrateDB.lgas);
+router.post("/user", migrateDB.users);
 
 export default router;
