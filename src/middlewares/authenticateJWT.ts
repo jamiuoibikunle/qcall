@@ -19,7 +19,7 @@ export default function authenticateJWT(
           return res.sendStatus(403);
         }
 
-        req.body = { ...req.body, user: user.user };
+        req.body = { ...req.body, user: user.id };
         next();
       }
     );

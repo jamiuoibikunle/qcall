@@ -64,7 +64,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res
                 .status(400)
                 .json({ status: 400, message: "Required fields missing" });
-        const userDetails = yield database_1.default.query("SELECT password FROM users WHERE email = $1", [email]);
+        const userDetails = yield database_1.default.query("SELECT password, id, email FROM users WHERE email = $1", [email]);
         if (userDetails.rowCount === 0)
             return res.status(400).json({
                 status: 400,
@@ -76,7 +76,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 status: 400,
                 message: `Invalid credentials: Password incorrect`,
             });
-        const token = jsonwebtoken_1.default.sign(userDetails.rows[0], process.env.SECRET_KEY, { expiresIn: "30d" });
+        const token = jsonwebtoken_1.default.sign({ id: userDetails.rows[0].id, email: userDetails.rows[0].email }, process.env.SECRET_KEY, { expiresIn: "30d" });
         return res.status(200).json({
             status: 200,
             token,
@@ -90,11 +90,26 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.loginUser = loginUser;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { first_name, last_name, date_of_birth, gender } = req.body;
-        const result = database_1.default.query("UPDATE users SET first_name = IsNull(first_name, $1), last_name = IsNull($2, last_name), date_of_birth = IsNull($3, date_of_birth), gender = IsNull($4, gender) WHERE id = 5", [first_name, last_name, date_of_birth, gender]);
+        let fieldsToUpdate = "";
+        let sqlQuery = "";
+        let count = 1;
+        for (const [key, value] of Object.entries(req.body)) {
+            if (key !== "user" && key !== "password") {
+                sqlQuery += `${key}=$${count},`;
+                fieldsToUpdate += `${value},`;
+                count++;
+            }
+        }
+        const fieldsToUpdateArray = fieldsToUpdate.replace(/.$/, "").split(",");
+        const result = yield database_1.default.query(`UPDATE users SET ${sqlQuery.replace(/.$/, "")} WHERE id = ${req.body.user}`, fieldsToUpdateArray);
+        if (result.rowCount === 0)
+            return res.status(400).json({
+                status: false,
+                message: "Encountered error while updating user",
+            });
         return res.status(200).json({
             status: 200,
-            message: `Updated successfully`,
+            message: `User successfully updated`,
         });
     }
     catch (error) {

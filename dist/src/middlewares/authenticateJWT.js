@@ -12,7 +12,7 @@ function authenticateJWT(req, res, next) {
             if (err) {
                 return res.sendStatus(403);
             }
-            req.body = Object.assign(Object.assign({}, req.body), { user: user.user });
+            req.body = Object.assign(Object.assign({}, req.body), { user: user.id });
             next();
         });
     }

@@ -74,7 +74,7 @@ const loginUser = async (req: Request, res: Response) => {
         .json({ status: 400, message: "Required fields missing" });
 
     const userDetails = await pool.query(
-      "SELECT password FROM users WHERE email = $1",
+      "SELECT password, id, email FROM users WHERE email = $1",
       [email]
     );
     if (userDetails.rowCount === 0)
@@ -91,7 +91,7 @@ const loginUser = async (req: Request, res: Response) => {
       });
 
     const token = jwt.sign(
-      userDetails.rows[0],
+      { id: userDetails.rows[0].id, email: userDetails.rows[0].email },
       process.env.SECRET_KEY as string,
       { expiresIn: "30d" }
     );
@@ -108,16 +108,35 @@ const loginUser = async (req: Request, res: Response) => {
 
 const updateUser = async (req: Request, res: Response) => {
   try {
-    const { first_name, last_name, date_of_birth, gender } = req.body;
+    let fieldsToUpdate: string = "";
+    let sqlQuery: string = "";
+    let count = 1;
 
-    const result = pool.query(
-      "UPDATE users SET first_name = IsNull(first_name, $1), last_name = IsNull($2, last_name), date_of_birth = IsNull($3, date_of_birth), gender = IsNull($4, gender) WHERE id = 5",
-      [first_name, last_name, date_of_birth, gender]
+    for (const [key, value] of Object.entries(req.body)) {
+      if (key !== "user" && key !== "password") {
+        sqlQuery += `${key}=$${count},`;
+        fieldsToUpdate += `${value},`;
+        count++;
+      }
+    }
+
+    const fieldsToUpdateArray = fieldsToUpdate.replace(/.$/, "").split(",");
+
+    const result = await pool.query(
+      `UPDATE users SET ${sqlQuery.replace(/.$/, "")} WHERE id = ${
+        req.body.user
+      }`,
+      fieldsToUpdateArray
     );
+    if (result.rowCount === 0)
+      return res.status(400).json({
+        status: false,
+        message: "Encountered error while updating user",
+      });
 
     return res.status(200).json({
       status: 200,
-      message: `Updated successfully`,
+      message: `User successfully updated`,
     });
   } catch (error) {
     return res.status(400).json(error);
