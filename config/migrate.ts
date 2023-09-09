@@ -44,7 +44,7 @@ const migrateDB = {
   },
   police: async (req: Request, res: Response) => {
     const result = await pool.query(
-      "CREATE TABLE police (ID SERIAL PRIMARY KEY, phone_number VARCHAR(255) NOT NULL, state_id INT NOT NULL, created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state_id) REFERENCES states(id))"
+      "CREATE TABLE police (ID SERIAL PRIMARY KEY, phone_number VARCHAR(255), state VARCHAR(255) NOT NULL, local_government VARCHAR(255) NOT NULL, created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name), FOREIGN KEY (local_government) REFERENCES lgas(name))"
     );
     if (!result)
       return res
