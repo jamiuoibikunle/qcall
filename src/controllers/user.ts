@@ -57,7 +57,49 @@ const registerUser = async (req: Request, res: Response) => {
     return res.status(200).json({
       status: 200,
       token,
-      message: `Authenticated: ${email} successfully registered`,
+      message: `Authenticated as ${email}`,
+    });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+const loginUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password)
+      return res
+        .status(400)
+        .json({ status: 400, message: "Required fields missing" });
+
+    const userDetails = await pool.query(
+      "SELECT password FROM users WHERE email = $1",
+      [email]
+    );
+    if (userDetails.rowCount === 0)
+      return res.status(400).json({
+        status: 400,
+        message: `Invalid credentials: ${email} not found`,
+      });
+
+    const valid = await bcrypt.compare(password, userDetails.rows[0].password);
+    if (!valid)
+      return res.status(400).json({
+        status: 400,
+        message: `Invalid credentials: Password incorrect`,
+      });
+
+    const token = jwt.sign(
+      userDetails.rows[0],
+      process.env.SECRET_KEY as string,
+      { expiresIn: "30d" }
+    );
+
+    return res.status(200).json({
+      status: 200,
+      token,
+      message: `Authenticated as ${email}`,
     });
   } catch (error) {
     console.log(error);
@@ -65,4 +107,4 @@ const registerUser = async (req: Request, res: Response) => {
   }
 };
 
-export { registerUser };
+export { loginUser, registerUser };
