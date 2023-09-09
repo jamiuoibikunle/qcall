@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import populate from "./src/routes/populate";
 import migrate from "./src/routes/migrate";
 import user from "./src/routes/user";
+import location from "./src/routes/location";
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.get("/", (req, res) => {
 app.use("/populate", populate);
 app.use("/migrate", migrate);
 app.use("/user", user);
+app.use("/location", location);
 
 app.listen(process.env.PORT, () => `Listening on port ${process.env.PORT}`);
