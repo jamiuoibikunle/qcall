@@ -55,6 +55,32 @@ const migrateDB = {
       .status(200)
       .json({ status: true, message: "Police table created" });
   },
+  health: async (req: Request, res: Response) => {
+    const result = await pool.query(
+      "CREATE TABLE health (ID SERIAL PRIMARY KEY, phone_number VARCHAR(255), state VARCHAR(255) NOT NULL, local_government VARCHAR(255) NOT NULL, created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name), FOREIGN KEY (local_government) REFERENCES lgas(name))"
+    );
+    if (!result)
+      return res
+        .status(400)
+        .json({ status: false, message: "Error while creating table" });
+
+    return res
+      .status(200)
+      .json({ status: true, message: "Health table created" });
+  },
+  fireservice: async (req: Request, res: Response) => {
+    const result = await pool.query(
+      "CREATE TABLE fireservice (ID SERIAL PRIMARY KEY, phone_number VARCHAR(255), state VARCHAR(255) NOT NULL, local_government VARCHAR(255) NOT NULL, created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name), FOREIGN KEY (local_government) REFERENCES lgas(name))"
+    );
+    if (!result)
+      return res
+        .status(400)
+        .json({ status: false, message: "Error while creating table" });
+
+    return res
+      .status(200)
+      .json({ status: true, message: "Fire service table created" });
+  },
 };
 
 export default migrateDB;

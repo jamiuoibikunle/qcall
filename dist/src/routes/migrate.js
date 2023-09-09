@@ -9,5 +9,7 @@ const router = (0, express_1.Router)();
 router.post("/state", migrate_1.default.states);
 router.post("/lgas", migrate_1.default.lgas);
 router.post("/user", migrate_1.default.users);
+router.post("/health", migrate_1.default.health);
 router.post("/police", migrate_1.default.police);
+router.post("/fireservice", migrate_1.default.fireservice);
 exports.default = router;
