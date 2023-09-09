@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerUser = exports.loginUser = void 0;
+exports.updateUser = exports.registerUser = exports.loginUser = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const database_1 = __importDefault(require("../../config/database"));
@@ -84,8 +84,21 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
-        console.log(error);
         return res.status(400).json(error);
     }
 });
 exports.loginUser = loginUser;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { first_name, last_name, date_of_birth, gender } = req.body;
+        const result = database_1.default.query("UPDATE users SET first_name = IsNull(first_name, $1), last_name = IsNull($2, last_name), date_of_birth = IsNull($3, date_of_birth), gender = IsNull($4, gender) WHERE id = 5", [first_name, last_name, date_of_birth, gender]);
+        return res.status(200).json({
+            status: 200,
+            message: `Updated successfully`,
+        });
+    }
+    catch (error) {
+        return res.status(400).json(error);
+    }
+});
+exports.updateUser = updateUser;

@@ -102,9 +102,26 @@ const loginUser = async (req: Request, res: Response) => {
       message: `Authenticated as ${email}`,
     });
   } catch (error) {
-    console.log(error);
     return res.status(400).json(error);
   }
 };
 
-export { loginUser, registerUser };
+const updateUser = async (req: Request, res: Response) => {
+  try {
+    const { first_name, last_name, date_of_birth, gender } = req.body;
+
+    const result = pool.query(
+      "UPDATE users SET first_name = IsNull(first_name, $1), last_name = IsNull($2, last_name), date_of_birth = IsNull($3, date_of_birth), gender = IsNull($4, gender) WHERE id = 5",
+      [first_name, last_name, date_of_birth, gender]
+    );
+
+    return res.status(200).json({
+      status: 200,
+      message: `Updated successfully`,
+    });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+export { loginUser, registerUser, updateUser };
