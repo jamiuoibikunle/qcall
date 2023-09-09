@@ -10,4 +10,5 @@ const router = (0, express_1.Router)();
 router.post("/login", user_1.loginUser);
 router.post("/register", user_1.registerUser);
 router.put("/", authenticateJWT_1.default, user_1.updateUser);
+router.get("/", authenticateJWT_1.default, user_1.getUser);
 exports.default = router;

@@ -143,4 +143,24 @@ const updateUser = async (req: Request, res: Response) => {
   }
 };
 
-export { loginUser, registerUser, updateUser };
+const getUser = async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query("SELECT id, first_name, last_name, date_of_birth, email, gender FROM users WHERE id = $1", [
+      req.body.user,
+    ]);
+    if (result.rowCount === 0)
+      return res.status(400).json({
+        status: false,
+        message: "Encountered error while getting user details",
+      });
+
+    return res.status(200).json({
+      status: 200,
+      message: result.rows[0],
+    });
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+export { getUser, loginUser, registerUser, updateUser };

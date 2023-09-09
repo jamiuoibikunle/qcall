@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.registerUser = exports.loginUser = void 0;
+exports.updateUser = exports.registerUser = exports.loginUser = exports.getUser = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const database_1 = __importDefault(require("../../config/database"));
@@ -117,3 +117,23 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateUser = updateUser;
+const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield database_1.default.query("SELECT id, first_name, last_name, date_of_birth, email, gender FROM users WHERE id = $1", [
+            req.body.user,
+        ]);
+        if (result.rowCount === 0)
+            return res.status(400).json({
+                status: false,
+                message: "Encountered error while getting user details",
+            });
+        return res.status(200).json({
+            status: 200,
+            message: result.rows[0],
+        });
+    }
+    catch (error) {
+        return res.status(400).json(error);
+    }
+});
+exports.getUser = getUser;
