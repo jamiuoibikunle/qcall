@@ -2,6 +2,20 @@ import { Request, Response } from "express";
 import pool from "./database";
 
 const migrateDB = {
+  users: async (req: Request, res: Response) => {
+    const result = await pool.query(
+      "CREATE TABLE states (ID SERIAL PRIMARY KEY, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, email VARCHAR(255) NOT NULL UNIQUE, password VARCHAR(255) NOT NULL, date_of_birth DATE NOT NULL, gender VARCHAR(255), created_at TIMESTAMP DEFAULT NOW())"
+    );
+
+    if (!result)
+      return res
+        .status(400)
+        .json({ status: false, message: "Error while creating table" });
+
+    return res
+      .status(200)
+      .json({ status: true, message: "User table created" });
+  },
   states: async (req: Request, res: Response) => {
     const result = await pool.query(
       "CREATE TABLE states (ID SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL UNIQUE, governor VARCHAR(255), deputy_governor VARCHAR(255), created_at TIMESTAMP DEFAULT NOW())"
@@ -12,7 +26,9 @@ const migrateDB = {
         .status(400)
         .json({ status: false, message: "Error while creating table" });
 
-    return res.status(200).json({ status: true, message: "Table created" });
+    return res
+      .status(200)
+      .json({ status: true, message: "State table created" });
   },
   lgas: async (req: Request, res: Response) => {
     const result = await pool.query(
@@ -24,7 +40,7 @@ const migrateDB = {
         .status(400)
         .json({ status: false, message: "Error while creating table" });
 
-    return res.status(200).json({ status: true, message: "Table created" });
+    return res.status(200).json({ status: true, message: "LGA table created" });
   },
   police: async (req: Request, res: Response) => {
     const result = await pool.query(
@@ -35,7 +51,9 @@ const migrateDB = {
         .status(400)
         .json({ status: false, message: "Error while creating table" });
 
-    return res.status(200).json({ status: true, message: "Table created" });
+    return res
+      .status(200)
+      .json({ status: true, message: "Police table created" });
   },
 };
 
