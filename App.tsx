@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './src/pages/SplashScreen';
 import {GluestackUIProvider, Text} from '@gluestack-ui/themed';
 import {config} from './gluestack-ui.config';
+import Onboarding from './src/pages/Onboarding';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,12 +16,8 @@ export default function App() {
           screenOptions={{
             headerShown: false,
           }}>
-          <Stack.Screen
-            name="Home"
-            component={SplashScreen}
-            options={{title: 'Welcome'}}
-          />
-          {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
+          <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="Onboarding" component={Onboarding} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>

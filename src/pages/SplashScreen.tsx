@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, VStack} from '@gluestack-ui/themed';
 
-const SplashScreen = () => {
+const SplashScreen = ({navigation}: any) => {
   const [colorCode, setColorCode] = useState({
     background: '#D42E12',
     color: 'white',
@@ -11,6 +11,10 @@ const SplashScreen = () => {
     setTimeout(() => {
       setColorCode({background: 'white', color: '#D42E12'});
     }, 2000);
+
+    setTimeout(() => {
+      navigation.navigate('Onboarding');
+    }, 4000);
   }, []);
 
   return (
