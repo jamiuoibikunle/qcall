@@ -1,16 +1,28 @@
 import React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './src/pages/SplashScreen';
 import {GluestackUIProvider, Text} from '@gluestack-ui/themed';
 import {config} from './gluestack-ui.config';
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <GluestackUIProvider config={config}>
-      <SplashScreen />
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen
+            name="Home"
+            component={SplashScreen}
+            options={{title: 'Welcome'}}
+          />
+          {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
+        </Stack.Navigator>
+      </NavigationContainer>
     </GluestackUIProvider>
   );
 }
