@@ -12,6 +12,7 @@ const Onboarding = () => {
   const [step, setStep] = useState(0);
 
   const handleNext = () => {
+    console.log('Works');
     if (step !== 2) setStep(step + 1);
   };
 
@@ -62,7 +63,7 @@ const StepOne = ({
         <Button variant="link" action="primary">
           <ButtonText color="#D42E12">Skip</ButtonText>
         </Button>
-        <Button bg="#D42E12">
+        <Button onPress={() => console.log('first')} action="primary" bg="#D42E12">
           <ButtonText>Next</ButtonText>
         </Button>
       </HStack>
@@ -91,10 +92,13 @@ const StepTwo = ({
         textAlign="center"
         color="#D42E12"
         lineHeight={50}>
-        Report emergencies with ease
+        Access a register of relevant emergency numbers
       </Heading>
       <HStack justifyContent="space-between" w="100%">
-        <Button variant="link" action="primary">
+        <Button
+          variant="link"
+          action="primary"
+          onPress={() => console.log('first')}>
           <ButtonText color="#D42E12">Skip</ButtonText>
         </Button>
         <Button bg="#D42E12">
@@ -126,10 +130,10 @@ const StepThree = ({
         textAlign="center"
         color="#D42E12"
         lineHeight={50}>
-        Report emergencies with ease
+        Access a register of relevant numbers of public servants
       </Heading>
       <HStack justifyContent="space-between" w="100%">
-        <Button variant="link" action="primary">
+        <Button variant="link" action="primary" onPress={() => console.log("first")}>
           <ButtonText color="#D42E12">Skip</ButtonText>
         </Button>
         <Button bg="#D42E12">
