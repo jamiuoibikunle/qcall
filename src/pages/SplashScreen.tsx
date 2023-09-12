@@ -1,32 +1,68 @@
 import React, {useEffect, useState} from 'react';
-import {Text, VStack} from '@gluestack-ui/themed';
+import {Text, VStack, View} from '@gluestack-ui/themed';
+import {AnimatePresence, Motion} from '@legendapp/motion';
 
 const SplashScreen = ({navigation}: any) => {
-  const [colorCode, setColorCode] = useState({
-    background: '#D42E12',
-    color: 'white',
-  });
+  const [step, setStep] = useState(0);
 
   useEffect(() => {
     setTimeout(() => {
-      setColorCode({background: 'white', color: '#D42E12'});
+      setStep(1);
     }, 2000);
-
-    setTimeout(() => {
-      navigation.navigate('Onboarding');
-    }, 4000);
   }, []);
 
+  switch (step) {
+    case 1:
+      return <StepTwo />;
+
+    default:
+      return <StepOne />;
+  }
+};
+
+const StepOne = () => {
   return (
-    <VStack
-      alignItems="center"
-      justifyContent="center"
-      flex={1}
-      bgColor={colorCode.background}>
-      <Text fontSize={34} py={20} color={colorCode.color}>
-        Q'Call
-      </Text>
-    </VStack>
+    <AnimatePresence>
+      <Motion.View
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{type: 'spring'}}
+        style={{
+          backgroundColor: '#D42E12',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text fontSize={34} py={20} color="white">
+          Q'Call
+        </Text>
+      </Motion.View>
+    </AnimatePresence>
+  );
+};
+
+const StepTwo = () => {
+  return (
+    <AnimatePresence>
+      <Motion.View
+        initial={{scale: 1, opacity: 0}}
+        animate={{scale: 1, opacity: 1}}
+        exit={{opacity: 0}}
+        transition={{type: 'spring'}}
+        style={{
+          backgroundColor: 'white',
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text fontSize={34} py={20} color="#D42E12">
+          Q'Call
+        </Text>
+      </Motion.View>
+    </AnimatePresence>
   );
 };
 

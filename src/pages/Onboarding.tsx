@@ -63,7 +63,7 @@ const StepOne = ({
         <Button variant="link" action="primary">
           <ButtonText color="#D42E12">Skip</ButtonText>
         </Button>
-        <Button onPress={() => console.log('first')} action="primary" bg="#D42E12">
+        <Button onPress={handleNext} action="primary" bg="#D42E12">
           <ButtonText>Next</ButtonText>
         </Button>
       </HStack>
@@ -95,10 +95,7 @@ const StepTwo = ({
         Access a register of relevant emergency numbers
       </Heading>
       <HStack justifyContent="space-between" w="100%">
-        <Button
-          variant="link"
-          action="primary"
-          onPress={() => console.log('first')}>
+        <Button variant="link" action="primary" onPress={handleNext}>
           <ButtonText color="#D42E12">Skip</ButtonText>
         </Button>
         <Button bg="#D42E12">
@@ -133,7 +130,10 @@ const StepThree = ({
         Access a register of relevant numbers of public servants
       </Heading>
       <HStack justifyContent="space-between" w="100%">
-        <Button variant="link" action="primary" onPress={() => console.log("first")}>
+        <Button
+          variant="link"
+          action="primary"
+          onPress={() => console.log('first')}>
           <ButtonText color="#D42E12">Skip</ButtonText>
         </Button>
         <Button bg="#D42E12">
