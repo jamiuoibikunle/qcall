@@ -11,6 +11,7 @@ import {
   HStack,
   Heading,
   Input,
+  InputField,
   Radio,
   RadioGroup,
   RadioIcon,
@@ -41,25 +42,33 @@ const SignUp = ({navigation}: any) => {
             <FormControlLabel>
               <Text color="#D42E12">First name</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField placeholder="" />
+            </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
               <Text color="#D42E12">Last name</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField placeholder="" />
+            </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField placeholder="" />
+            </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
               <Text color="#D42E12">Date of Birth</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField placeholder="dd/mm/yy" />
+            </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
@@ -114,7 +123,9 @@ const SignUp = ({navigation}: any) => {
             <FormControlLabel>
               <Text color="#D42E12">Password</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField placeholder="" />
+            </Input>
           </FormControl>
           <Checkbox value="policy" aria-label="policy" w="100%">
             <CheckboxIndicator borderColor="#D42E12" mr="$2">
