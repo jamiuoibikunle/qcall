@@ -124,7 +124,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Password</Text>
             </FormControlLabel>
             <Input>
-            <InputField placeholder="" />
+            <InputField type="password" placeholder="" />
             </Input>
           </FormControl>
           <Checkbox value="policy" aria-label="policy" w="100%">

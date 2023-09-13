@@ -10,6 +10,7 @@ import {
   HStack,
   Heading,
   Input,
+  InputField,
   ScrollView,
   Text,
   VStack,
@@ -35,13 +36,17 @@ const SignIn = ({navigation}: any) => {
             <FormControlLabel>
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField placeholder="" />
+            </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
               <Text color="#D42E12">Password</Text>
             </FormControlLabel>
-            <Input />
+            <Input>
+            <InputField type="password" placeholder="" />
+            </Input>
           </FormControl>
           <Checkbox value="policy" aria-label="policy" w="100%">
             <CheckboxIndicator borderColor="#D42E12" mr="$2">
