@@ -5,6 +5,7 @@ import SplashScreen from './src/pages/SplashScreen';
 import {GluestackUIProvider, Text} from '@gluestack-ui/themed';
 import {config} from './gluestack-ui.config';
 import Onboarding from './src/pages/Onboarding';
+import SignUp from './src/pages/SignUp';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
           }}>
           <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="SignUp" component={SignUp} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>

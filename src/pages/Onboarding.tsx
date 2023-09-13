@@ -12,12 +12,12 @@ import React, {useState} from 'react';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome6';
 
-const Onboarding = () => {
+const Onboarding = ({navigation}: any) => {
   const [step, setStep] = useState(0);
 
   const handleNext = () => {
-    console.log('Works');
     if (step !== 2) setStep(step + 1);
+    else navigation.navigate('SignUp');
   };
 
   const handlePrevious = () => {
@@ -34,18 +34,16 @@ const Onboarding = () => {
         <StepThree handleNext={handleNext} handlePrevious={handlePrevious} />
       );
     default:
-      return (
-        <StepOne handleNext={handleNext} handlePrevious={handlePrevious} />
-      );
+      return <StepOne navigation={navigation} handleNext={handleNext} />;
   }
 };
 
 const StepOne = ({
   handleNext,
-  handlePrevious,
+  navigation,
 }: {
   handleNext: () => void;
-  handlePrevious: () => void;
+  navigation: any;
 }) => {
   return (
     <AnimatePresence>
@@ -74,7 +72,11 @@ const StepOne = ({
             </Heading>
             <HStack justifyContent="space-between" w="100%">
               <Button variant="link" action="primary">
-                <ButtonText color="#D42E12">Skip</ButtonText>
+                <ButtonText
+                  color="#D42E12"
+                  onPress={() => navigation.navigate('SignUp')}>
+                  Skip
+                </ButtonText>
               </Button>
               <Button onPress={handleNext} action="primary" bg="#D42E12">
                 <ButtonText>Next</ButtonText>
