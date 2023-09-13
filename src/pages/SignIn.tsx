@@ -56,7 +56,7 @@ const SignIn = ({navigation}: any) => {
               <Text>Remember me</Text>
             </CheckboxLabel>
           </Checkbox>
-          <Button w="100%" bg="#d42e12">
+          <Button w="100%" bg="#d42e12" onPress={() => navigation.navigate("Dashboard")}>
             <Text color="white">Sign In</Text>
           </Button>
           <HStack alignItems="center" gap="$1">

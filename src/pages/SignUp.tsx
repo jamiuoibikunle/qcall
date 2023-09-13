@@ -135,7 +135,7 @@ const SignUp = ({navigation}: any) => {
               <Text>I agree to the Terms and Privacy policy</Text>
             </CheckboxLabel>
           </Checkbox>
-          <Button w="100%" bg="#d42e12">
+          <Button w="100%" bg="#d42e12" onPress={() => navigation.navigate("Dashboard")}>
             <Text color="white">Sign Up</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
