@@ -23,7 +23,7 @@ import {
 } from '@gluestack-ui/themed';
 import React from 'react';
 
-const SignUp = () => {
+const SignUp = ({navigation}: any) => {
   return (
     <View flex={1}>
       <ScrollView>
@@ -129,7 +129,9 @@ const SignUp = () => {
           </Button>
           <HStack alignItems="center" gap="$1">
             <Text>Do you already have a Q'call account?</Text>
-            <Button variant="link">
+            <Button
+              variant="link"
+              onPress={() => navigation.navigate('SignIn')}>
               <Text color="#d42e12" py={0}>
                 Sign In
               </Text>
