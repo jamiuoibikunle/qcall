@@ -11,7 +11,7 @@ const SplashScreen = ({navigation}: any) => {
     }, 2000);
 
     setTimeout(() => {
-      navigation.navigate("Onboarding")
+      navigation.navigate('Onboarding');
     }, 4000);
   }, []);
 
@@ -40,16 +40,11 @@ const StepOne = () => {
           alignItems: 'center',
           flexDirection: 'row',
         }}>
-        <HStack>
-          <Image
-            w={50}
-            h={50}
-            source={require('../../public/logo-white.png')}
-          />
-          <Text fontSize={45} fontWeight="600" py={20} color="white">
-            'call
-          </Text>
-        </HStack>
+        <Image
+          h="$20"
+          resizeMode="contain"
+          source={require('../../public/splash-image01.png')}
+        />
       </Motion.View>
     </AnimatePresence>
   );
@@ -71,16 +66,11 @@ const StepTwo = () => {
           alignItems: 'center',
           flexDirection: 'row',
         }}>
-        <HStack>
-          <Image
-            w={50}
-            h={50}
-            source={require('../../public/logo-colored.png')}
-          />
-          <Text fontSize={45} fontWeight="600" py={20} color="#D42E12">
-            'call
-          </Text>
-        </HStack>
+        <Image
+          h="$20"
+          resizeMode="contain"
+          source={require('../../public/splash-image02.png')}
+        />
       </Motion.View>
     </AnimatePresence>
   );
