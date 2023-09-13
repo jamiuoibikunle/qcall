@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SplashScreen from './src/pages/SplashScreen';
 import {GluestackUIProvider, Text} from '@gluestack-ui/themed';
 import {config} from './gluestack-ui.config';
@@ -23,7 +24,11 @@ export default function App() {
           <Stack.Screen name="Onboarding" component={Onboarding} />
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="SignIn" component={SignIn} />
-          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen
+            name="Dashboard"
+            component={Dashboard}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
