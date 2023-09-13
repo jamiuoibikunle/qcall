@@ -11,14 +11,23 @@ import {
   Heading,
   Input,
   InputField,
+  InputIcon,
   ScrollView,
   Text,
   VStack,
   View,
 } from '@gluestack-ui/themed';
-import React from 'react';
+import React, {useState} from 'react';
+import Feather from 'react-native-vector-icons/Feather';
 
 const SignIn = ({navigation}: any) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handlePasswordVisibility = () => {
+    setShowPassword(showPassword => {
+      return !showPassword;
+    });
+  };
+
   return (
     <View flex={1}>
       <ScrollView>
@@ -37,7 +46,7 @@ const SignIn = ({navigation}: any) => {
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
             <Input>
-            <InputField placeholder="" />
+              <InputField placeholder="" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -45,7 +54,14 @@ const SignIn = ({navigation}: any) => {
               <Text color="#D42E12">Password</Text>
             </FormControlLabel>
             <Input>
-            <InputField type="password" placeholder="" />
+              <InputField type="password" placeholder="" />
+              <InputIcon pr="$3" onPress={handlePasswordVisibility}>
+                {!showPassword ? (
+                  <Feather size={20} name="eye" />
+                ) : (
+                  <Feather size={20} name="eye-off" />
+                )}
+              </InputIcon>
             </Input>
           </FormControl>
           <Checkbox value="policy" aria-label="policy" w="100%">
@@ -56,7 +72,10 @@ const SignIn = ({navigation}: any) => {
               <Text>Remember me</Text>
             </CheckboxLabel>
           </Checkbox>
-          <Button w="100%" bg="#d42e12" onPress={() => navigation.navigate("Dashboard")}>
+          <Button
+            w="100%"
+            bg="#d42e12"
+            onPress={() => navigation.navigate('Dashboard')}>
             <Text color="white">Sign In</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
