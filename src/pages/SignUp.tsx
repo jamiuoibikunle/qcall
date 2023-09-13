@@ -12,6 +12,7 @@ import {
   Heading,
   Input,
   InputField,
+  InputIcon,
   Radio,
   RadioGroup,
   RadioIcon,
@@ -22,9 +23,17 @@ import {
   VStack,
   View,
 } from '@gluestack-ui/themed';
-import React from 'react';
+import Feather from 'react-native-vector-icons/Feather';
+import React, {useState} from 'react';
 
 const SignUp = ({navigation}: any) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const handlePasswordVisibility = () => {
+    setShowPassword(showPassword => {
+      return !showPassword;
+    });
+  };
+
   return (
     <View flex={1}>
       <ScrollView>
@@ -43,7 +52,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">First name</Text>
             </FormControlLabel>
             <Input>
-            <InputField placeholder="" />
+              <InputField placeholder="" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -51,7 +60,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Last name</Text>
             </FormControlLabel>
             <Input>
-            <InputField placeholder="" />
+              <InputField placeholder="" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -59,7 +68,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
             <Input>
-            <InputField placeholder="" />
+              <InputField placeholder="" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -67,7 +76,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Date of Birth</Text>
             </FormControlLabel>
             <Input>
-            <InputField placeholder="dd/mm/yy" />
+              <InputField placeholder="dd/mm/yy" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -80,7 +89,7 @@ const SignUp = ({navigation}: any) => {
                 size="md"
                 isInvalid={false}
                 isDisabled={false}>
-                <RadioIndicator mr="$2">
+                <RadioIndicator borderColor="#D42E12" mr="$2">
                   <RadioIcon
                     style={{color: '#D42E12'}}
                     as={CircleIcon}
@@ -94,7 +103,7 @@ const SignUp = ({navigation}: any) => {
                 size="md"
                 isInvalid={false}
                 isDisabled={false}>
-                <RadioIndicator mr="$2">
+                <RadioIndicator borderColor="#D42E12" mr="$2">
                   <RadioIcon
                     style={{color: '#D42E12'}}
                     as={CircleIcon}
@@ -108,7 +117,7 @@ const SignUp = ({navigation}: any) => {
                 size="md"
                 isInvalid={false}
                 isDisabled={false}>
-                <RadioIndicator mr="$2">
+                <RadioIndicator borderColor="#D42E12" mr="$2">
                   <RadioIcon
                     style={{color: '#D42E12'}}
                     as={CircleIcon}
@@ -124,7 +133,17 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Password</Text>
             </FormControlLabel>
             <Input>
-            <InputField type="password" placeholder="" />
+              <InputField
+                type={!showPassword ? 'password' : 'text'}
+                placeholder=""
+              />
+              <InputIcon pr="$3" onPress={handlePasswordVisibility}>
+                {!showPassword ? (
+                  <Feather size={20} name="eye" />
+                ) : (
+                  <Feather size={20} name="eye-off" />
+                )}
+              </InputIcon>
             </Input>
           </FormControl>
           <Checkbox value="policy" aria-label="policy" w="100%">
@@ -135,7 +154,10 @@ const SignUp = ({navigation}: any) => {
               <Text>I agree to the Terms and Privacy policy</Text>
             </CheckboxLabel>
           </Checkbox>
-          <Button w="100%" bg="#d42e12" onPress={() => navigation.navigate("Dashboard")}>
+          <Button
+            w="100%"
+            bg="#d42e12"
+            onPress={() => navigation.navigate('Dashboard')}>
             <Text color="white">Sign Up</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
