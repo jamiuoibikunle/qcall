@@ -26,7 +26,7 @@ const Profile = ({navigation}: any) => {
     <VStack p="$5" alignItems="center" gap="$8">
       <HStack alignItems="center" position="relative">
         <Button
-          onPress={() => navigation.navigate('Profile')}
+          onPress={() => navigation.goBack()}
           variant="link"
           position="absolute"
           left={0}>
