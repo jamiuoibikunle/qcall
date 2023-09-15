@@ -26,9 +26,10 @@ const Profile = ({navigation}: any) => {
     <VStack p="$5" alignItems="center" gap="$8">
       <HStack alignItems="center" position="relative">
         <Button
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate('Dashboard')}
           variant="link"
           position="absolute"
+          zIndex={1000}
           left={0}>
           <Feather name="chevron-left" size={25} color="#d42e12" />
         </Button>
