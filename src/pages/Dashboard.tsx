@@ -7,6 +7,7 @@ import Menu from './dashboard/Menu';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ function Dashboard() {
           else if (route.name == 'Register')
             return <SimpleLineIcons name="note" size={size} color={color} />;
           else if (route.name == 'Menu')
-            return <Ionicons name="menu" size={size} color={color} />;
+            return <Entypo name="grid" size={size} color={color} />;
         },
         tabBarActiveTintColor: '#d42e12',
         tabBarInactiveTintColor: 'rgba(212, 46, 18, 0.65)',
