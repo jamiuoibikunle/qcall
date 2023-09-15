@@ -139,9 +139,9 @@ const SignUp = ({navigation}: any) => {
               />
               <InputIcon pr="$3" onPress={handlePasswordVisibility}>
                 {!showPassword ? (
-                  <Feather size={20} name="eye" />
+                  <Feather color="#d42e12" size={20} name="eye" />
                 ) : (
-                  <Feather size={20} name="eye-off" />
+                  <Feather color="#d42e12" size={20} name="eye-off" />
                 )}
               </InputIcon>
             </Input>
