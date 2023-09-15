@@ -12,7 +12,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Menu = () => {
+const Menu = ({navigation}: any) => {
   return (
     <VStack alignItems="center" flex={1} px="$5" py="$10" gap="$10">
       <VStack alignItems="center" gap="$2">
@@ -40,7 +40,11 @@ const Menu = () => {
           </Text>
           <Feather name="chevron-right" size={25} color="#d42e12" />
         </Button>
-        <Button w="$full" bg="transparent" gap="$3">
+        <Button
+          w="$full"
+          bg="transparent"
+          gap="$3"
+          onPress={() => navigation.navigate('Profile')}>
           <Feather name="settings" size={24} color="#d42e12" />
           <Text flex={1} numberOfLines={1} fontWeight="600">
             Settings

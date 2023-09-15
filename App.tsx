@@ -9,6 +9,7 @@ import Onboarding from './src/pages/Onboarding';
 import SignUp from './src/pages/SignUp';
 import SignIn from './src/pages/SignIn';
 import Dashboard from './src/pages/Dashboard';
+import Profile from './src/pages/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export default function App() {
             component={Dashboard}
             options={{headerShown: false}}
           />
+          <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>
