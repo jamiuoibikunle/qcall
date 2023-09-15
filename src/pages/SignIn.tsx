@@ -78,6 +78,12 @@ const SignIn = ({navigation}: any) => {
             onPress={() => navigation.navigate('Dashboard')}>
             <Text color="white">Sign In</Text>
           </Button>
+          <Text>Or</Text>
+          <Button variant="link">
+            <Text color="#d42e12">
+              Continue as a guest
+            </Text>
+          </Button>
           <HStack alignItems="center" gap="$1">
             <Text>You don't have a Q'call account?</Text>
             <Button
