@@ -23,7 +23,7 @@ const ModalBody = ({
           <Button onPress={onClose} variant="link" alignSelf="flex-end">
             <Entypo name="cross" size={30} color="#d42e12" />
           </Button>
-          <Box>{children}</Box>
+          <Box w="$full">{children}</Box>
         </VStack>
       </Center>
     </Modal>
