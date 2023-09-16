@@ -8,13 +8,6 @@ import {
   Heading,
   Icon,
   Image,
-  Modal,
-  ModalBackdrop,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
   ScrollView,
   Text,
   VStack,
@@ -23,19 +16,22 @@ import {
 import React, {useState, useRef} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import CustomModal from '../../components/CustomModal';
+import ModalBody from '../../components/ModalBody';
 import useDisclosure from '../../hooks/useDisclosure';
+import Modal from '../../components/Modal';
 
 const Home = () => {
   const {isOpen, onOpen, onClose} = useDisclosure();
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
-      <CustomModal isOpen={isOpen} onClose={onClose}>
-        <VStack>
-          <Heading>Call LGA Vice Chairman</Heading>
-        </VStack>
-      </CustomModal>
+      <Modal isOpen={isOpen}>
+        <ModalBody onClose={onClose}>
+          <VStack>
+            <Heading>Call LGA Vice Chairman</Heading>
+          </VStack>
+        </ModalBody>
+      </Modal>
       <VStack gap="$4" flex={1} p="$5">
         <HStack alignItems="center" gap="$3">
           <Center
