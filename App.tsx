@@ -10,6 +10,7 @@ import SignUp from './src/pages/SignUp';
 import SignIn from './src/pages/SignIn';
 import Dashboard from './src/pages/Dashboard';
 import Profile from './src/pages/Profile';
+import Executives from './src/pages/Executives';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ export default function App() {
             options={{headerShown: false}}
           />
           <Stack.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Executives" component={Executives} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>

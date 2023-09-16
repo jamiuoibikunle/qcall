@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   HStack,
   Heading,
@@ -12,7 +13,7 @@ import {
 import React from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 
-const Register = () => {
+const Register = ({navigation}: any) => {
   return (
     <VStack w="$full" p="$5" alignItems="center" gap="$5">
       <Heading color="#d42e12" fontSize="$2xl">
@@ -27,80 +28,120 @@ const Register = () => {
         </Input>
       </FormControl>
       <ScrollView w="$full">
-        <VStack gap="$5">
+        <VStack gap="$5" pb="$40">
           <VStack gap="$5">
             <Text color="#d42e12">Recent searches</Text>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Executives</Heading>
-              </VStack>
+            <Button
+              onPress={() => navigation.navigate('Executives')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Executives
+              </Heading>
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Legislatives</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Legislatives
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
+            </Button>
           </VStack>
           <VStack gap="$5">
             <Text color="#d42e12">A-Z List</Text>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Executives</Heading>
-              </VStack>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Executives
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Fire Service</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Fire Service
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Health Service</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Health Service
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Legislatives</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Legislatives
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Nigerian Air Force</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Nigerian Air Force
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Nigerian Army</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Nigerian Army
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Nigerian Navy</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Nigerian Navy
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>
-                  Nigeria Security and Civil Defence
-                </Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Nigeia Security and Civil Defence
+              </Heading>
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
-            <HStack alignItems="center">
-              <VStack flex={1}>
-                <Heading numberOfLines={1}>Police Force</Heading>
-              </VStack>
+            </Button>
+            <Button
+              onPress={() => navigation.navigate('')}
+              variant="link"
+              bg="transparent">
+              <Heading flex={1} numberOfLines={1}>
+                Police Force
+              </Heading>
+
               <Feather name="chevron-right" size={30} color="#d42e12" />
-            </HStack>
+            </Button>
           </VStack>
         </VStack>
       </ScrollView>
