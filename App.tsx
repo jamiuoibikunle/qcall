@@ -11,6 +11,14 @@ import SignIn from './src/pages/SignIn';
 import Dashboard from './src/pages/Dashboard';
 import Profile from './src/pages/Profile';
 import Executives from './src/pages/Executives';
+import Legislatives from './src/pages/Legislatives';
+import FireService from './src/pages/FireService';
+import HealthService from './src/pages/HealthService';
+import NigerianAirForce from './src/pages/NigerianAirForce';
+import NigerianArmy from './src/pages/NigerianArmy';
+import NigerianNavy from './src/pages/NigerianNavy';
+import NigeriaSecurityAndCivilDefence from './src/pages/NigeriaSecurityAndCivilDefence';
+import PoliceForce from './src/pages/PoliceForce';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +41,17 @@ export default function App() {
           />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="Executives" component={Executives} />
+          <Stack.Screen name="Legislatives" component={Legislatives} />
+          <Stack.Screen name="FireService" component={FireService} />
+          <Stack.Screen name="HealthService" component={HealthService} />
+          <Stack.Screen name="NigerianAirForce" component={NigerianAirForce} />
+          <Stack.Screen name="NigerianArmy" component={NigerianArmy} />
+          <Stack.Screen name="NigerianNavy" component={NigerianNavy} />
+          <Stack.Screen
+            name="NigeriaSecurityAndCivilDefence"
+            component={NigeriaSecurityAndCivilDefence}
+          />
+          <Stack.Screen name="PoliceForce" component={PoliceForce} />
         </Stack.Navigator>
       </NavigationContainer>
     </GluestackUIProvider>

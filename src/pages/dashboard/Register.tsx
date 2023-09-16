@@ -41,7 +41,7 @@ const Register = ({navigation}: any) => {
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('Legislatives')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
@@ -54,7 +54,7 @@ const Register = ({navigation}: any) => {
           <VStack gap="$5">
             <Text color="#d42e12">A-Z List</Text>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('Executives')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
@@ -64,17 +64,16 @@ const Register = ({navigation}: any) => {
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('FireService')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
                 Fire Service
               </Heading>
-
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('HealthService')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
@@ -84,56 +83,54 @@ const Register = ({navigation}: any) => {
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('Legislatives')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
                 Legislatives
               </Heading>
-
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('NigerianAirForce')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
                 Nigerian Air Force
               </Heading>
-
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('NigerianArmy')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
                 Nigerian Army
               </Heading>
-
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('NigerianNavy')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
                 Nigerian Navy
               </Heading>
-
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() =>
+                navigation.navigate('NigeriaSecurityAndCivilDefence')
+              }
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
-                Nigeia Security and Civil Defence
+                Nigeria Security and Civil Defence
               </Heading>
               <Feather name="chevron-right" size={30} color="#d42e12" />
             </Button>
             <Button
-              onPress={() => navigation.navigate('')}
+              onPress={() => navigation.navigate('PoliceForce')}
               variant="link"
               bg="transparent">
               <Heading flex={1} numberOfLines={1}>
