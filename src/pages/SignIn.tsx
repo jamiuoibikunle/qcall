@@ -46,7 +46,7 @@ const SignIn = ({navigation}: any) => {
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" />
+              <InputField placeholder="" placeholderTextColor="#d42e12" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -54,7 +54,11 @@ const SignIn = ({navigation}: any) => {
               <Text color="#D42E12">Password</Text>
             </FormControlLabel>
             <Input>
-              <InputField type="password" placeholder="" />
+              <InputField
+                type="password"
+                placeholder=""
+                placeholderTextColor="#d42e12"
+              />
               <InputIcon pr="$3" onPress={handlePasswordVisibility}>
                 {!showPassword ? (
                   <Feather color="#d42e12" size={20} name="eye" />
@@ -80,9 +84,7 @@ const SignIn = ({navigation}: any) => {
           </Button>
           <Text>Or</Text>
           <Button variant="link">
-            <Text color="#d42e12">
-              Continue as a guest
-            </Text>
+            <Text color="#d42e12">Continue as a guest</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
             <Text>You don't have a Q'call account?</Text>

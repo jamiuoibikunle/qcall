@@ -52,7 +52,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">First name</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" />
+              <InputField placeholder="" placeholderTextColor="#d42e12" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -60,7 +60,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Last name</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" />
+              <InputField placeholder="" placeholderTextColor="#d42e12" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -68,7 +68,7 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" />
+              <InputField placeholder="" placeholderTextColor="#d42e12" />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -136,6 +136,7 @@ const SignUp = ({navigation}: any) => {
               <InputField
                 type={!showPassword ? 'password' : 'text'}
                 placeholder=""
+                placeholderTextColor="#d42e12"
               />
               <InputIcon pr="$3" onPress={handlePasswordVisibility}>
                 {!showPassword ? (
