@@ -1,22 +1,41 @@
 import {
   Box,
   Button,
+  ButtonText,
   Center,
+  CloseIcon,
   HStack,
   Heading,
+  Icon,
   Image,
+  Modal,
+  ModalBackdrop,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
   ScrollView,
   Text,
   VStack,
   View,
 } from '@gluestack-ui/themed';
-import React from 'react';
+import React, {useState, useRef} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import CustomModal from '../../components/CustomModal';
+import useDisclosure from '../../hooks/useDisclosure';
 
 const Home = () => {
+  const {isOpen, onOpen, onClose} = useDisclosure();
+
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
+      <CustomModal isOpen={isOpen} onClose={onClose}>
+        <VStack>
+          <Heading>Call LGA Vice Chairman</Heading>
+        </VStack>
+      </CustomModal>
       <VStack gap="$4" flex={1} p="$5">
         <HStack alignItems="center" gap="$3">
           <Center
@@ -39,18 +58,22 @@ const Home = () => {
         </Button>
         <HStack flexWrap="wrap" justifyContent="space-between" rowGap="$8">
           <Item
+            onOpen={onOpen}
             image={require('../../../public/health.png')}
             title="Health Emergency"
           />
           <Item
+            onOpen={onOpen}
             image={require('../../../public/fire.png')}
             title="Fire Emergency"
           />
           <Item
+            onOpen={onOpen}
             image={require('../../../public/police.png')}
             title="Health Emergency"
           />
           <Item
+            onOpen={onOpen}
             image={require('../../../public/more.png')}
             title="Fire Emergency"
           />
@@ -64,21 +87,33 @@ const Home = () => {
   );
 };
 
-const Item = ({image, title}: {image: any; title: string}) => {
+const Item = ({
+  image,
+  title,
+  onOpen,
+}: {
+  image: any;
+  title: string;
+  onOpen: () => void;
+}) => {
+  const [showModal, setShowModal] = useState(false);
+  const ref = useRef();
+
   return (
-    <VStack
+    <Button
+      onPress={onOpen}
+      variant="link"
       w="48%"
       h="$40"
-      justifyContent="center"
-      alignItems="center"
-      gap="$5"
       p="$5"
       borderRadius="$md"
       borderWidth="$1"
       borderColor="$backgroundDark200">
-      <Image source={image} />
-      <Text>{title}</Text>
-    </VStack>
+      <VStack justifyContent="center" alignItems="center" gap="$5">
+        <Image source={image} />
+        <Text>{title}</Text>
+      </VStack>
+    </Button>
   );
 };
 
