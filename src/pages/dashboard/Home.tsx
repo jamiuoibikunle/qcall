@@ -23,7 +23,7 @@ import Modal from '../../components/Modal';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const Home = () => {
+const Home = ({navigation}: any) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [details, setDetails] = useState({person: '', number: ''});
 
@@ -58,19 +58,21 @@ const Home = () => {
       </Modal>
       <VStack gap="$4" flex={1} p="$5">
         <HStack alignItems="center" gap="$3">
-          <Center
-            bg="rgba(212, 46, 18, 0.25)"
-            h="$16"
-            w="$16"
-            borderRadius="$full">
-            <Ionicons color="#d42e12" name="person-outline" size={22} />
-          </Center>
+          <Button variant="link" onPress={() => navigation.navigate('Profile')}>
+            <Center
+              bg="rgba(212, 46, 18, 0.25)"
+              h="$16"
+              w="$16"
+              borderRadius="$full">
+              <Ionicons color="#d42e12" name="person-outline" size={22} />
+            </Center>
+          </Button>
           <VStack flex={1}>
             <Heading>Ahmad Bashir</Heading>
             <Text>41'24'12.2"N 2'10'26.5"E</Text>
           </VStack>
           <Box alignSelf="flex-start">
-            <SimpleLineIcons color="#d42e12" size={28} name="bell" />
+            <SimpleLineIcons color="#d42e12" size={22} name="bell" />
           </Box>
         </HStack>
         <Button variant="link" alignSelf="flex-start">

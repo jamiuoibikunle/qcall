@@ -24,7 +24,7 @@ const Menu = ({navigation}: any) => {
           <Ionicons color="#d42e12" name="person-outline" size={22} />
         </Center>
         <Heading>Ahmad Bashir</Heading>
-        <Button variant="link">
+        <Button variant="link" onPress={() => navigation.navigate('Profile')}>
           <Text color="#d42e12">Edit profile</Text>
         </Button>
       </VStack>
@@ -40,11 +40,7 @@ const Menu = ({navigation}: any) => {
           </Text>
           <Feather name="chevron-right" size={25} color="#d42e12" />
         </Button>
-        <Button
-          w="$full"
-          bg="transparent"
-          gap="$3"
-          onPress={() => navigation.navigate('Profile')}>
+        <Button w="$full" bg="transparent" gap="$3">
           <Feather name="settings" size={24} color="#d42e12" />
           <Text flex={1} numberOfLines={1} fontWeight="600">
             Settings
