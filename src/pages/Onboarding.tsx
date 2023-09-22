@@ -11,6 +11,8 @@ import {AnimatePresence, Motion} from '@legendapp/motion';
 import React, {useState} from 'react';
 import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome6';
+import {useDispatch} from 'react-redux';
+import {markWelcomeAsFalse} from '../features/slices/welcomeSlice';
 
 const Onboarding = ({navigation}: any) => {
   const [step, setStep] = useState(0);
@@ -45,6 +47,8 @@ const StepOne = ({
   handleNext: () => void;
   navigation: any;
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <AnimatePresence>
       <Motion.View
@@ -74,7 +78,10 @@ const StepOne = ({
               <Button variant="link" action="primary">
                 <ButtonText
                   color="#D42E12"
-                  onPress={() => navigation.navigate('SignUp')}>
+                  onPress={() => {
+                    dispatch(markWelcomeAsFalse());
+                    navigation.navigate('SignUp');
+                  }}>
                   Skip
                 </ButtonText>
               </Button>
@@ -143,6 +150,8 @@ const StepThree = ({
   handleNext: () => void;
   handlePrevious: () => void;
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <AnimatePresence>
       <Motion.View
@@ -172,7 +181,13 @@ const StepThree = ({
               <Button variant="link" action="primary" onPress={handlePrevious}>
                 <FontAwesome color="#D42E12" name="arrow-left-long" size={25} />
               </Button>
-              <Button onPress={handleNext} action="primary" bg="#D42E12">
+              <Button
+                onPress={() => {
+                  dispatch(markWelcomeAsFalse());
+                  handleNext();
+                }}
+                action="primary"
+                bg="#D42E12">
                 <ButtonText>Next</ButtonText>
               </Button>
             </HStack>
