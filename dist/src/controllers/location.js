@@ -30,7 +30,7 @@ const getLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return res
                 .status(400)
                 .json({ status: false, message: "Couldn't get county" });
-        const matchedResults = yield database_1.default.query("SELECT states.id as state_id, lgas.id as lga_id, state, lgas.name as lga, governor, deputy_governor, chairman, vice_chairman, secretary FROM lgas INNER JOIN states ON lgas.state = states.name WHERE lgas.name = $1", [county]);
+        const matchedResults = yield database_1.default.query("SELECT s.id as state_id, s.governor, s.deputy_governor, l.id as lga_id, l.chairman, l.vice_chairman, l.secretary, f.phone_number as fireservice, p.phone_number as police, h.phone_number as health FROM lgas as l INNER JOIN states as s ON l.state = s.name INNER JOIN fireservice as f ON f.state = s.name INNER JOIN health as h ON h.state = s.name INNER JOIN police as p ON p.state = s.name WHERE l.name = $1", [county]);
         return res.status(200).json({
             status: true,
             components: results[0].components,
