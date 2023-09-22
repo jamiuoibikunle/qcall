@@ -24,6 +24,7 @@ import {
   View,
 } from '@gluestack-ui/themed';
 import Feather from 'react-native-vector-icons/Feather';
+import DatePicker from 'react-native-date-picker';
 import React, {useState} from 'react';
 
 const SignUp = ({navigation}: any) => {
@@ -33,6 +34,17 @@ const SignUp = ({navigation}: any) => {
       return !showPassword;
     });
   };
+
+  const [date, setDate] = useState(new Date('2013-01-01'));
+  const [dateModalOpen, setDateModalOpen] = useState(false);
+
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [gender, setGender] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [agreedToPolicies, setAgreedToPolicies] = useState(false);
 
   return (
     <View flex={1}>
@@ -52,7 +64,12 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">First name</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" placeholderTextColor="#d42e12" />
+              <InputField
+                onChangeText={e => setFirstName(e)}
+                defaultValue={firstName}
+                placeholder=""
+                placeholderTextColor="#d42e12"
+              />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -60,7 +77,12 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Last name</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" placeholderTextColor="#d42e12" />
+              <InputField
+                onChangeText={e => setLastName(e)}
+                defaultValue={lastName}
+                placeholder=""
+                placeholderTextColor="#d42e12"
+              />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -68,7 +90,12 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" placeholderTextColor="#d42e12" />
+              <InputField
+                onChangeText={e => setEmail(e)}
+                defaultValue={email}
+                placeholder=""
+                placeholderTextColor="#d42e12"
+              />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -76,14 +103,37 @@ const SignUp = ({navigation}: any) => {
               <Text color="#D42E12">Date of Birth</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="dd/mm/yy" />
+              <Button
+                borderWidth={0}
+                w="100%"
+                variant="outline"
+                onPress={() => setDateModalOpen(true)}>
+                <Text textAlign="left" w="100%">
+                  {date.toLocaleDateString()}
+                </Text>
+              </Button>
+              <DatePicker
+                modal
+                minimumDate={new Date('1873-01-01')}
+                maximumDate={new Date('2013-01-01')}
+                mode="date"
+                open={dateModalOpen}
+                date={date}
+                onConfirm={date => {
+                  setDateModalOpen(false);
+                  setDate(date);
+                }}
+                onCancel={() => {
+                  setDateModalOpen(false);
+                }}
+              />
             </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
               <Text color="#D42E12">Gender</Text>
             </FormControlLabel>
-            <RadioGroup as={HStack} gap="$5">
+            <RadioGroup onChange={e => setGender(e)} as={HStack} gap="$5">
               <Radio
                 value="male"
                 size="md"
@@ -134,6 +184,7 @@ const SignUp = ({navigation}: any) => {
             </FormControlLabel>
             <Input>
               <InputField
+                onChangeText={e => setPassword(e)}
                 type={!showPassword ? 'password' : 'text'}
                 placeholder=""
                 placeholderTextColor="#d42e12"
@@ -147,7 +198,11 @@ const SignUp = ({navigation}: any) => {
               </InputIcon>
             </Input>
           </FormControl>
-          <Checkbox value="policy" aria-label="policy" w="100%">
+          <Checkbox
+            onChange={e => setAgreedToPolicies(e)}
+            value="policy"
+            aria-label="policy"
+            w="100%">
             <CheckboxIndicator borderColor="#D42E12" mr="$2">
               <CheckboxIcon backgroundColor="#D42E12" as={CheckIcon} />
             </CheckboxIndicator>
@@ -156,9 +211,21 @@ const SignUp = ({navigation}: any) => {
             </CheckboxLabel>
           </Checkbox>
           <Button
+            isDisabled={
+              !firstName ||
+              !lastName ||
+              !email ||
+              !date ||
+              !gender ||
+              !password ||
+              !agreedToPolicies
+            }
             w="100%"
             bg="#d42e12"
-            onPress={() => navigation.navigate('Dashboard')}>
+            onPress={() => {
+              console.log(firstName, lastName, email, date, gender, password);
+              // navigation.navigate('Dashboard');
+            }}>
             <Text color="white">Sign Up</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
