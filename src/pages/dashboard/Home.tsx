@@ -22,6 +22,7 @@ import useDisclosure from '../../hooks/useDisclosure';
 import Modal from '../../components/Modal';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {Linking} from 'react-native';
 
 const Home = ({navigation}: any) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
@@ -40,16 +41,25 @@ const Home = ({navigation}: any) => {
               Call {details.person}
             </Heading>
             <VStack gap="$4" w="70%" alignItems="flex-start">
-              <Button gap="$5" variant="link">
-                <Feather size={20} name="phone-call" />
+              <Button
+                onPress={() => Linking.openURL(`tel:911`)}
+                gap="$5"
+                variant="link">
+                <Feather color="black" size={20} name="phone-call" />
                 <Text>Call with phone app</Text>
               </Button>
-              <Button gap="$5" variant="link">
-                <Feather size={20} name="message-square" />
+              <Button
+                onPress={() => Linking.openURL(`sms:911`)}
+                gap="$5"
+                variant="link">
+                <Feather color="black" size={20} name="message-square" />
                 <Text>Message with SMS</Text>
               </Button>
-              <Button gap="$5" variant="link">
-                <FontAwesome size={20} name="whatsapp" />
+              <Button
+                onPress={() => Linking.openURL(`https:wa.me/911`)}
+                gap="$5"
+                variant="link">
+                <FontAwesome color="black" size={20} name="whatsapp" />
                 <Text>Message with WhatsApp</Text>
               </Button>
             </VStack>
