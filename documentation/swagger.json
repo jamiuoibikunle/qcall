@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "QCall Rest API Documentation",
+    "version": "1.0.0"
+  },
+  "schemes": ["http"],
+  "servers": [{ "url": "http://localhost:4000/" }],
+  "paths": {
+    "/example": {
+      "post": {
+        "tags": ["ExampleEndpoints"],
+        "summary": "Send a text to the server",
+        "description": "Send a message to the server and get a response added to the original text.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExampleSchemaHeader"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExampleSchemaBody"
+                }
+              }
+            }
+          },
+          "404": { "description": "Not found" },
+          "500": { "description": "Internal server error" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "required": [
+          "id",
+          "first_name",
+          "last_name",
+          "email",
+          "password",
+          "date_of_birth"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "date_of_birth": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "States": {
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "governor": {
+            "type": "string"
+          },
+          "deputy_governor": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Lgas": {
+        "required": ["id", "state", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "chairman": {
+            "type": "string"
+          },
+          "vice_chairman": {
+            "type": "string"
+          },
+          "secretary": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Fireservice": {
+        "required": ["id", "state", "local_government"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "local_government": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Health": {
+        "required": ["id", "state", "local_government"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "local_government": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      },
+      "Police": {
+        "required": ["id", "state", "local_government"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "local_government": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

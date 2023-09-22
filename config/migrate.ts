@@ -32,7 +32,7 @@ const migrateDB = {
   },
   lgas: async (req: Request, res: Response) => {
     const result = await pool.query(
-      "CREATE TABLE lgas (ID SERIAL PRIMARY KEY, state VARCHAR(255) NULL, name VARCHAR(255) NOT NULL UNIQUE, chairman VARCHAR(255), vice_chairman VARCHAR(255), secretary VARCHAR(255), created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name))"
+      "CREATE TABLE lgas (ID SERIAL PRIMARY KEY, state VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, chairman VARCHAR(255), vice_chairman VARCHAR(255), secretary VARCHAR(255), created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name))"
     );
 
     if (!result)

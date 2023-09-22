@@ -35,7 +35,7 @@ const migrateDB = {
             .json({ status: true, message: "State table created" });
     }),
     lgas: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield database_1.default.query("CREATE TABLE lgas (ID SERIAL PRIMARY KEY, state VARCHAR(255) NULL, name VARCHAR(255) NOT NULL UNIQUE, chairman VARCHAR(255), vice_chairman VARCHAR(255), secretary VARCHAR(255), created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name))");
+        const result = yield database_1.default.query("CREATE TABLE lgas (ID SERIAL PRIMARY KEY, state VARCHAR(255) NOT NULL, name VARCHAR(255) NOT NULL UNIQUE, chairman VARCHAR(255), vice_chairman VARCHAR(255), secretary VARCHAR(255), created_at TIMESTAMP DEFAULT NOW(), FOREIGN KEY (state) REFERENCES states(name))");
         if (!result)
             return res
                 .status(400)
