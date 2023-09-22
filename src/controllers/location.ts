@@ -22,7 +22,7 @@ const getLocation = async (req: Request, res: Response) => {
         .json({ status: false, message: "Couldn't get county" });
 
     const matchedResults = await pool.query(
-      "SELECT * FROM lgas INNER JOIN states ON lgas.state = states.name WHERE lgas.name = $1",
+      "SELECT states.id as state_id, lgas.id as lga_id, state, lgas.name as lga, governor, deputy_governor, chairman, vice_chairman, secretary FROM lgas INNER JOIN states ON lgas.state = states.name WHERE lgas.name = $1",
       [county]
     );
 
@@ -32,6 +32,7 @@ const getLocation = async (req: Request, res: Response) => {
       matched: matchedResults.rows[0],
     });
   } catch (error) {
+    console.log(error)
     return res.status(400).json({ status: false, message: error });
   }
 };

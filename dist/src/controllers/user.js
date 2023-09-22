@@ -84,6 +84,7 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     catch (error) {
+        console.log(error);
         return res.status(400).json(error);
     }
 });
@@ -119,9 +120,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 exports.updateUser = updateUser;
 const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield database_1.default.query("SELECT id, first_name, last_name, date_of_birth, email, gender FROM users WHERE id = $1", [
-            req.body.user,
-        ]);
+        const result = yield database_1.default.query("SELECT id, first_name, last_name, date_of_birth, email, gender FROM users WHERE id = $1", [req.body.user]);
         if (result.rowCount === 0)
             return res.status(400).json({
                 status: false,

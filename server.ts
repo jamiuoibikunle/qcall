@@ -2,7 +2,6 @@ import express from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import swaggerUi from "swagger-ui-express";
-import swaggerJSDoc from "swagger-jsdoc";
 
 import populate from "./src/routes/populate";
 import migrate from "./src/routes/migrate";

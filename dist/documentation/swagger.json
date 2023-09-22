@@ -7,17 +7,30 @@
     "schemes": ["http"],
     "servers": [{ "url": "http://localhost:4000/" }],
     "paths": {
-        "/example": {
+        "/user/register": {
             "post": {
-                "tags": ["ExampleEndpoints"],
-                "summary": "Send a text to the server",
-                "description": "Send a message to the server and get a response added to the original text.",
+                "tags": ["Users"],
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/ExampleSchemaHeader"
+                                "$ref": "#/components/schemas/Users"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/login": {
+            "post": {
+                "tags": ["Users"],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users"
                             }
                         }
                     }

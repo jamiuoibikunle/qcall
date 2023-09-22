@@ -77,6 +77,7 @@ const loginUser = async (req: Request, res: Response) => {
       "SELECT password, id, email FROM users WHERE email = $1",
       [email]
     );
+
     if (userDetails.rowCount === 0)
       return res.status(400).json({
         status: 400,
@@ -102,6 +103,7 @@ const loginUser = async (req: Request, res: Response) => {
       message: `Authenticated as ${email}`,
     });
   } catch (error) {
+    console.log(error)
     return res.status(400).json(error);
   }
 };
@@ -145,9 +147,10 @@ const updateUser = async (req: Request, res: Response) => {
 
 const getUser = async (req: Request, res: Response) => {
   try {
-    const result = await pool.query("SELECT id, first_name, last_name, date_of_birth, email, gender FROM users WHERE id = $1", [
-      req.body.user,
-    ]);
+    const result = await pool.query(
+      "SELECT id, first_name, last_name, date_of_birth, email, gender FROM users WHERE id = $1",
+      [req.body.user]
+    );
     if (result.rowCount === 0)
       return res.status(400).json({
         status: false,

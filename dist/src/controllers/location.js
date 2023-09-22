@@ -30,7 +30,7 @@ const getLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return res
                 .status(400)
                 .json({ status: false, message: "Couldn't get county" });
-        const matchedResults = yield database_1.default.query("SELECT * FROM lgas INNER JOIN states ON lgas.state = states.name WHERE lgas.name = $1", [county]);
+        const matchedResults = yield database_1.default.query("SELECT states.id as state_id, lgas.id as lga_id, state, lgas.name as lga, governor, deputy_governor, chairman, vice_chairman, secretary FROM lgas INNER JOIN states ON lgas.state = states.name WHERE lgas.name = $1", [county]);
         return res.status(200).json({
             status: true,
             components: results[0].components,
@@ -38,6 +38,7 @@ const getLocation = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
     catch (error) {
+        console.log(error);
         return res.status(400).json({ status: false, message: error });
     }
 });
