@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {HStack, Image, Text, VStack, View} from '@gluestack-ui/themed';
 import {AnimatePresence, Motion} from '@legendapp/motion';
+import {useSelector} from 'react-redux';
+import {RootState} from '../types/ReduxInterface';
 
 const SplashScreen = ({navigation}: any) => {
   const [step, setStep] = useState(0);
+  const {welcome} = useSelector((state: RootState) => state.welcome);
+  const {userID, token} = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     setTimeout(() => {
@@ -11,7 +15,11 @@ const SplashScreen = ({navigation}: any) => {
     }, 2000);
 
     setTimeout(() => {
-      navigation.navigate('Onboarding');
+      welcome
+        ? navigation.navigate('Onboarding')
+        : userID && token
+        ? navigation.navigate('Dashboard')
+        : navigation.navigate('SignIn');
     }, 4000);
   }, []);
 
