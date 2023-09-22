@@ -223,8 +223,7 @@ const SignUp = ({navigation}: any) => {
             w="100%"
             bg="#d42e12"
             onPress={() => {
-              console.log(firstName, lastName, email, date, gender, password);
-              // navigation.navigate('Dashboard');
+              navigation.navigate('Dashboard');
             }}>
             <Text color="white">Sign Up</Text>
           </Button>

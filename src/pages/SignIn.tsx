@@ -28,6 +28,9 @@ const SignIn = ({navigation}: any) => {
     });
   };
 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <View flex={1}>
       <ScrollView>
@@ -46,7 +49,12 @@ const SignIn = ({navigation}: any) => {
               <Text color="#D42E12">E-mail</Text>
             </FormControlLabel>
             <Input>
-              <InputField placeholder="" placeholderTextColor="#d42e12" />
+              <InputField
+                defaultValue={email}
+                onChangeText={e => setEmail(e)}
+                placeholder=""
+                placeholderTextColor="#d42e12"
+              />
             </Input>
           </FormControl>
           <FormControl w="100%">
@@ -55,6 +63,8 @@ const SignIn = ({navigation}: any) => {
             </FormControlLabel>
             <Input>
               <InputField
+                defaultValue={password}
+                onChangeText={e => setPassword(e)}
                 type="password"
                 placeholder=""
                 placeholderTextColor="#d42e12"
@@ -77,13 +87,16 @@ const SignIn = ({navigation}: any) => {
             </CheckboxLabel>
           </Checkbox>
           <Button
+            isDisabled={!email || !password}
             w="100%"
             bg="#d42e12"
             onPress={() => navigation.navigate('Dashboard')}>
             <Text color="white">Sign In</Text>
           </Button>
           <Text>Or</Text>
-          <Button variant="link">
+          <Button
+            variant="link"
+            onPress={() => navigation.navigate('Dashboard')}>
             <Text color="#d42e12">Continue as a guest</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
