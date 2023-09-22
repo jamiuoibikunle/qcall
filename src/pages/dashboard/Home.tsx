@@ -76,32 +76,36 @@ const Home = () => {
         <Button variant="link" alignSelf="flex-start">
           <Text color="#d42e12">Report Emergency</Text>
         </Button>
-        <HStack flexWrap="wrap" justifyContent="space-between" rowGap="$8">
-          <Item
-            forwardDetails={forwardDetails}
-            onOpen={onOpen}
-            image={require('../../../public/health.png')}
-            title="Health Emergency"
-          />
-          <Item
-            forwardDetails={forwardDetails}
-            onOpen={onOpen}
-            image={require('../../../public/fire.png')}
-            title="Fire Emergency"
-          />
-          <Item
-            forwardDetails={forwardDetails}
-            onOpen={onOpen}
-            image={require('../../../public/police.png')}
-            title="Health Emergency"
-          />
-          <Item
-            forwardDetails={forwardDetails}
-            onOpen={onOpen}
-            image={require('../../../public/more.png')}
-            title="Fire Emergency"
-          />
-        </HStack>
+        <VStack gap="$5">
+          <HStack justifyContent="space-between" gap="$5">
+            <Item
+              forwardDetails={forwardDetails}
+              onOpen={onOpen}
+              image={require('../../../public/health.png')}
+              title="Health Emergency"
+            />
+            <Item
+              forwardDetails={forwardDetails}
+              onOpen={onOpen}
+              image={require('../../../public/fire.png')}
+              title="Fire Emergency"
+            />
+          </HStack>
+          <HStack justifyContent="space-between" gap="$5">
+            <Item
+              forwardDetails={forwardDetails}
+              onOpen={onOpen}
+              image={require('../../../public/police.png')}
+              title="Health Emergency"
+            />
+            <Item
+              forwardDetails={forwardDetails}
+              onOpen={onOpen}
+              image={require('../../../public/more.png')}
+              title="Fire Emergency"
+            />
+          </HStack>
+        </VStack>
         <Image
           source={require('../../../public/map-placeholder.png')}
           w="100%"
@@ -129,7 +133,7 @@ const Item = ({
         onOpen();
       }}
       variant="link"
-      w="48%"
+      flex={1}
       h="$40"
       p="$5"
       borderRadius="$md"
