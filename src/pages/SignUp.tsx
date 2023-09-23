@@ -43,6 +43,8 @@ const SignUp = ({navigation}: any) => {
     });
   };
 
+  const [loading, setLoading] = useState(false);
+
   const [date, setDate] = useState(new Date('2013-01-01'));
   const [dateModalOpen, setDateModalOpen] = useState(false);
 
@@ -226,13 +228,17 @@ const SignUp = ({navigation}: any) => {
               !date ||
               !gender ||
               !password ||
-              !agreedToPolicies
+              !agreedToPolicies ||
+              loading
             }
             w="100%"
             bg="#d42e12"
             onPress={async () => {
+              setLoading(true);
+
               const valid = validateEmail(email);
               if (!valid) {
+                setLoading(false);
                 return toast.show({
                   placement: 'bottom',
                   render: ({id}) => {
@@ -259,7 +265,27 @@ const SignUp = ({navigation}: any) => {
                 gender,
                 password,
               });
-              console.log(submitted);
+
+              if (submitted.message.includes('Duplicate')) {
+                setLoading(false);
+                return toast.show({
+                  placement: 'bottom',
+                  render: ({id}) => {
+                    return (
+                      <Toast nativeId={id} action="error" variant="solid">
+                        <VStack space="xs">
+                          <ToastTitle>Email already registered</ToastTitle>
+                          <ToastDescription>
+                            The email address you have provided is registered
+                            with another account. Please use a different email
+                            and try again.
+                          </ToastDescription>
+                        </VStack>
+                      </Toast>
+                    );
+                  },
+                });
+              }
 
               // navigation.navigate('Dashboard');
             }}>
