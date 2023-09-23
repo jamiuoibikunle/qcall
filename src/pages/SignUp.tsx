@@ -32,9 +32,12 @@ import DatePicker from 'react-native-date-picker';
 import React, {useState} from 'react';
 import {validateEmail} from '../utils/validateEmail';
 import {handleSignUp} from '../utils/handleSignUp';
+import {useDispatch} from 'react-redux';
+import {handleUpdateToken} from '../features/slices/userSlice';
 
 const SignUp = ({navigation}: any) => {
   const toast = useToast();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordVisibility = () => {
@@ -287,7 +290,8 @@ const SignUp = ({navigation}: any) => {
                 });
               }
 
-              // navigation.navigate('Dashboard');
+              dispatch(handleUpdateToken(submitted.token));
+              navigation.navigate('Dashboard');
             }}>
             <Text color="white">Sign Up</Text>
           </Button>
