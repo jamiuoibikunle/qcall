@@ -42,7 +42,11 @@ export default function App() {
               <Stack.Screen
                 name="Dashboard"
                 component={Dashboard}
-                options={{headerShown: false}}
+                options={{
+                  headerShown: false,
+                  headerLeft: () => null,
+                  headerBackVisible: false,
+                }}
               />
               <Stack.Screen name="Profile" component={Profile} />
               <Stack.Screen name="Executives" component={Executives} />

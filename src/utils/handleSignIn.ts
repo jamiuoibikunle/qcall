@@ -1,14 +1,7 @@
-export const handleSignUp = async ({
-  firstName,
-  lastName,
-  email,
-  dateOfBirth,
-  gender,
-  password,
-}: SignUpProps) => {
+export const handleSignIn = async ({email, password}: SignInProps) => {
   try {
     const result = await fetch(
-      'https://ke5ef2zrqvcxpm7xh5ytkj2czq0rytbr.lambda-url.us-east-1.on.aws/user/register',
+      'https://ke5ef2zrqvcxpm7xh5ytkj2czq0rytbr.lambda-url.us-east-1.on.aws/user/login',
       {
         method: 'POST',
         headers: {
@@ -16,11 +9,7 @@ export const handleSignUp = async ({
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
           email,
-          date_of_birth: dateOfBirth,
-          gender,
           password,
         }),
       },

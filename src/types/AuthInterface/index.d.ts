@@ -6,3 +6,8 @@ interface SignUpProps {
   gender: string;
   password: string;
 }
+
+interface SignInProps {
+  email: string;
+  password: string;
+}

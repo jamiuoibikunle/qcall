@@ -14,13 +14,25 @@ import {
   InputIcon,
   ScrollView,
   Text,
+  Toast,
+  ToastDescription,
+  ToastTitle,
   VStack,
   View,
+  useToast,
 } from '@gluestack-ui/themed';
 import React, {useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
+import {handleSignIn} from '../utils/handleSignIn';
+import {useDispatch} from 'react-redux';
+import {handleUpdateToken} from '../features/slices/userSlice';
 
 const SignIn = ({navigation}: any) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(false);
+
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordVisibility = () => {
     setShowPassword(showPassword => {
@@ -90,7 +102,56 @@ const SignIn = ({navigation}: any) => {
             isDisabled={!email || !password}
             w="100%"
             bg="#d42e12"
-            onPress={() => navigation.navigate('Dashboard')}>
+            onPress={async () => {
+              setLoading(true);
+
+              const response = await handleSignIn({
+                email,
+                password,
+              });
+
+              if (response.status == 400) {
+                setLoading(false);
+                return toast.show({
+                  placement: 'bottom',
+                  render: ({id}) => {
+                    return (
+                      <Toast nativeId={id} action="error" variant="solid">
+                        <VStack space="xs">
+                          <ToastTitle>Incorrect credentials</ToastTitle>
+                          <ToastDescription>
+                            Your login details are incorrect. Kindly check and
+                            try again.
+                          </ToastDescription>
+                        </VStack>
+                      </Toast>
+                    );
+                  },
+                });
+              } else if (response.status == 200) {
+                setLoading(false);
+                dispatch(handleUpdateToken(response.token));
+                return navigation.navigate('Dashboard');
+              }
+
+              setLoading(false);
+              return toast.show({
+                placement: 'bottom',
+                render: ({id}) => {
+                  return (
+                    <Toast nativeId={id} action="error" variant="solid">
+                      <VStack space="xs">
+                        <ToastTitle>Error signing you in</ToastTitle>
+                        <ToastDescription>
+                          There was an error while we tried to sign you in.
+                          Kindly try again.
+                        </ToastDescription>
+                      </VStack>
+                    </Toast>
+                  );
+                },
+              });
+            }}>
             <Text color="white">Sign In</Text>
           </Button>
           <Text>Or</Text>

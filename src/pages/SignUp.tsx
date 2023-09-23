@@ -29,11 +29,12 @@ import {
 } from '@gluestack-ui/themed';
 import Feather from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {validateEmail} from '../utils/validateEmail';
 import {handleSignUp} from '../utils/handleSignUp';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {handleUpdateToken} from '../features/slices/userSlice';
+import {RootState} from '../types/ReduxInterface';
 
 const SignUp = ({navigation}: any) => {
   const toast = useToast();
@@ -290,6 +291,7 @@ const SignUp = ({navigation}: any) => {
                 });
               }
 
+              setLoading(false);
               dispatch(handleUpdateToken(submitted.token));
               navigation.navigate('Dashboard');
             }}>
