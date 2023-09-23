@@ -20,14 +20,22 @@ import {
   RadioLabel,
   ScrollView,
   Text,
+  Toast,
+  ToastDescription,
+  ToastTitle,
   VStack,
   View,
+  useToast,
 } from '@gluestack-ui/themed';
 import Feather from 'react-native-vector-icons/Feather';
 import DatePicker from 'react-native-date-picker';
 import React, {useState} from 'react';
+import {validateEmail} from '../utils/validateEmail';
+import {handleSignUp} from '../utils/handleSignUp';
 
 const SignUp = ({navigation}: any) => {
+  const toast = useToast();
+
   const [showPassword, setShowPassword] = useState(false);
   const handlePasswordVisibility = () => {
     setShowPassword(showPassword => {
@@ -222,8 +230,38 @@ const SignUp = ({navigation}: any) => {
             }
             w="100%"
             bg="#d42e12"
-            onPress={() => {
-              navigation.navigate('Dashboard');
+            onPress={async () => {
+              const valid = validateEmail(email);
+              if (!valid) {
+                return toast.show({
+                  placement: 'bottom',
+                  render: ({id}) => {
+                    return (
+                      <Toast nativeId={id} action="info" variant="solid">
+                        <VStack space="xs">
+                          <ToastTitle>Invalid email address</ToastTitle>
+                          <ToastDescription>
+                            The email you have provided doesn't seem to be
+                            valid. Please check and try again.
+                          </ToastDescription>
+                        </VStack>
+                      </Toast>
+                    );
+                  },
+                });
+              }
+
+              const submitted = await handleSignUp({
+                firstName,
+                lastName,
+                email,
+                dateOfBirth: date,
+                gender,
+                password,
+              });
+              console.log(submitted);
+
+              // navigation.navigate('Dashboard');
             }}>
             <Text color="white">Sign Up</Text>
           </Button>
