@@ -14,7 +14,7 @@ import {
   VStack,
   View,
 } from '@gluestack-ui/themed';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import ModalBody from '../../components/ModalBody';
@@ -23,8 +23,33 @@ import Modal from '../../components/Modal';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Linking} from 'react-native';
+import {fetchUserDetails} from '../../utils/fetchUserDetails';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../types/ReduxInterface';
+import {handleUpdateUserInfo} from '../../features/slices/userSlice';
 
 const Home = ({navigation}: any) => {
+  const dispatch = useDispatch();
+  const {token, info} = useSelector((state: RootState) => state.user);
+
+  useEffect(() => {
+    const handleFetch = async () => {
+      if (token) {
+        const {message} = await fetchUserDetails(token);
+        dispatch(
+          handleUpdateUserInfo({
+            firstName: message.first_name,
+            lastName: message.last_name,
+            email: message.email,
+            gender: message.gender,
+          }),
+        );
+      }
+    };
+
+    handleFetch();
+  }, [token]);
+
   const {isOpen, onOpen, onClose} = useDisclosure();
   const [details, setDetails] = useState({person: '', number: ''});
 
@@ -78,7 +103,7 @@ const Home = ({navigation}: any) => {
             </Center>
           </Button>
           <VStack flex={1}>
-            <Heading>Ahmad Bashir</Heading>
+            <Heading>{`${info.firstName} ${info.lastName}`}</Heading>
             <Text>41'24'12.2"N 2'10'26.5"E</Text>
           </VStack>
           <Box alignSelf="flex-start">
