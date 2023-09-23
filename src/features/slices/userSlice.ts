@@ -9,6 +9,7 @@ export const userSlice = createSlice({
       lastName: '',
       email: '',
       gender: '',
+      dateOfBirth: '',
     },
   },
   reducers: {

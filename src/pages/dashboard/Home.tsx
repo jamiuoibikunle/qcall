@@ -42,6 +42,7 @@ const Home = ({navigation}: any) => {
             lastName: message.last_name,
             email: message.email,
             gender: message.gender,
+            dateOfBirth: message.date_of_birth,
           }),
         );
       }
@@ -103,7 +104,11 @@ const Home = ({navigation}: any) => {
             </Center>
           </Button>
           <VStack flex={1}>
-            <Heading>{`${info.firstName} ${info.lastName}`}</Heading>
+            {token ? (
+              <Heading>{`${info.firstName} ${info.lastName}`}</Heading>
+            ) : (
+              <Heading>Guest</Heading>
+            )}
             <Text>41'24'12.2"N 2'10'26.5"E</Text>
           </VStack>
           <Box alignSelf="flex-start">

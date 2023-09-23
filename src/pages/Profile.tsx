@@ -15,13 +15,40 @@ import {
   RadioLabel,
   ScrollView,
   Text,
+  Toast,
+  ToastDescription,
+  ToastTitle,
   VStack,
+  useToast,
 } from '@gluestack-ui/themed';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../types/ReduxInterface';
+import DatePicker from 'react-native-date-picker';
+import {updateUserDetails} from '../utils/updateUserDetails';
+import {fetchUserDetails} from '../utils/fetchUserDetails';
+import {handleUpdateUserInfo} from '../features/slices/userSlice';
 
 const Profile = ({navigation}: any) => {
+  const toast = useToast();
+  const dispatch = useDispatch();
+  const {info, token} = useSelector((state: RootState) => state.user);
+
+  const [date, setDate] = useState(
+    new Date(
+      `${new Date(info.dateOfBirth).getFullYear()}-${new Date(
+        info.dateOfBirth,
+      ).getMonth()}-${new Date(info.dateOfBirth).getDay()}`,
+    ),
+  );
+  const [dateModalOpen, setDateModalOpen] = useState(false);
+
+  const [gender, setGender] = useState(info.gender);
+  const [firstName, setFirstName] = useState(info.firstName);
+  const [lastName, setLastName] = useState(info.lastName);
+
   return (
     <VStack p="$5" alignItems="center" gap="$8">
       <HStack alignItems="center" position="relative">
@@ -62,7 +89,10 @@ const Profile = ({navigation}: any) => {
               <Text color="#d42e12">First Name</Text>
             </FormControlLabel>
             <Input bg="rgba(212, 46, 18, 0.25)">
-              <InputField />
+              <InputField
+                onChangeText={e => setFirstName(e)}
+                value={firstName}
+              />
             </Input>
           </FormControl>
           <FormControl>
@@ -70,7 +100,7 @@ const Profile = ({navigation}: any) => {
               <Text color="#d42e12">Last Name</Text>
             </FormControlLabel>
             <Input bg="rgba(212, 46, 18, 0.25)">
-              <InputField />
+              <InputField onChangeText={e => setLastName(e)} value={lastName} />
             </Input>
           </FormControl>
           <FormControl>
@@ -78,22 +108,49 @@ const Profile = ({navigation}: any) => {
               <Text color="#d42e12">E-mail</Text>
             </FormControlLabel>
             <Input bg="rgba(212, 46, 18, 0.25)">
-              <InputField />
+              <InputField value={info.email} />
             </Input>
           </FormControl>
-          <FormControl>
+          <FormControl w="100%">
             <FormControlLabel>
-              <Text color="#d42e12">Age</Text>
+              <Text color="#D42E12">Date of Birth</Text>
             </FormControlLabel>
-            <Input bg="rgba(212, 46, 18, 0.25)">
-              <InputField />
+            <Input>
+              <Button
+                borderWidth={0}
+                w="100%"
+                bg="rgba(212, 46, 18, 0.25)"
+                onPress={() => setDateModalOpen(true)}>
+                <Text textAlign="left" w="100%">
+                  {date.toLocaleDateString()}
+                </Text>
+              </Button>
+              <DatePicker
+                modal
+                minimumDate={new Date('1873-01-01')}
+                maximumDate={new Date('2013-01-01')}
+                mode="date"
+                open={dateModalOpen}
+                date={date as any}
+                onConfirm={date => {
+                  setDateModalOpen(false);
+                  setDate(date);
+                }}
+                onCancel={() => {
+                  setDateModalOpen(false);
+                }}
+              />
             </Input>
           </FormControl>
           <FormControl w="100%">
             <FormControlLabel>
               <Text color="#D42E12">Gender</Text>
             </FormControlLabel>
-            <RadioGroup as={HStack} gap="$5">
+            <RadioGroup
+              as={HStack}
+              gap="$5"
+              value={gender}
+              onChange={e => setGender(e)}>
               <Radio
                 value="male"
                 size="md"
@@ -149,7 +206,58 @@ const Profile = ({navigation}: any) => {
               <Text color="#d42e12">Change password</Text>
             </Button>
           </FormControl>
-          <Button bg="#d42e12">
+          <Button
+            bg="#d42e12"
+            onPress={async () => {
+              const result = await updateUserDetails({
+                token,
+                firstName,
+                lastName,
+                email: info.email,
+                gender,
+                dateOfBirth: date,
+              });
+
+              if (result.status == 200) {
+                return toast.show({
+                  placement: 'bottom',
+                  render: ({id}) => {
+                    return (
+                      <Toast nativeId={id} action="error" variant="solid">
+                        <VStack space="xs">
+                          <ToastTitle>Request successful</ToastTitle>
+                          <ToastDescription>
+                            Your details were updated successfully. Redirecting
+                            to dashboard.
+                          </ToastDescription>
+                        </VStack>
+                      </Toast>
+                    );
+                  },
+                });
+              }
+
+              const handleFetch = async () => {
+                if (token) {
+                  const {message} = await fetchUserDetails(token);
+                  dispatch(
+                    handleUpdateUserInfo({
+                      firstName: message.first_name,
+                      lastName: message.last_name,
+                      email: message.email,
+                      gender: message.gender,
+                      dateOfBirth: message.date_of_birth,
+                    }),
+                  );
+                }
+              };
+
+              await handleFetch();
+
+              setTimeout(() => {
+                navigation.navigate('Dashboard');
+              }, 2500);
+            }}>
             <Text color="white">Save Changes</Text>
           </Button>
         </VStack>
