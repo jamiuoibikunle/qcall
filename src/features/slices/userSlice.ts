@@ -19,8 +19,21 @@ export const userSlice = createSlice({
     handleUpdateUserInfo(state, action) {
       state.info = action.payload;
     },
+    handleClearState(state: any) {
+      state = {
+        token: '',
+        info: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          gender: '',
+          dateOfBirth: '',
+        },
+      };
+    },
   },
 });
 
-export const {handleUpdateToken, handleUpdateUserInfo} = userSlice.actions;
+export const {handleUpdateToken, handleUpdateUserInfo, handleClearState} =
+  userSlice.actions;
 export default userSlice.reducer;

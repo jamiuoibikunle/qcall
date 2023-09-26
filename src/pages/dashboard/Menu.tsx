@@ -11,10 +11,34 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../../types/ReduxInterface';
+import {handleClearState} from '../../features/slices/userSlice';
+import {Alert} from 'react-native';
 
 const Menu = ({navigation}: any) => {
+  const dispatch = useDispatch();
+
   const {info} = useSelector((state: RootState) => state.user);
+
+  const dispatchAlert = () =>
+    Alert.alert(
+      'Comfirm Logout',
+      'Are you sure you want to log out from your account?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            dispatch(handleClearState());
+            navigation.navigate('SignIn');
+          },
+        },
+      ],
+    );
 
   return (
     <VStack alignItems="center" flex={1} px="$5" py="$10" gap="$10">
@@ -57,7 +81,7 @@ const Menu = ({navigation}: any) => {
           </Text>
           <Feather name="chevron-right" size={25} color="#d42e12" />
         </Button>
-        <Button w="$full" bg="transparent" gap="$3">
+        <Button w="$full" bg="transparent" gap="$3" onPress={dispatchAlert}>
           <Feather name="log-out" size={24} color="#d42e12" />
           <Text flex={1} numberOfLines={1} fontWeight="600">
             Log out
