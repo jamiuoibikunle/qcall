@@ -15,6 +15,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../types/ReduxInterface';
 import {handleClearState} from '../../features/slices/userSlice';
 import {Alert} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {markWelcomeAsFalse} from '../../features/slices/welcomeSlice';
 
 const Menu = ({navigation}: any) => {
   const dispatch = useDispatch();
@@ -33,7 +35,8 @@ const Menu = ({navigation}: any) => {
         {
           text: 'OK',
           onPress: () => {
-            dispatch(handleClearState());
+            AsyncStorage.clear();
+            dispatch(markWelcomeAsFalse());
             navigation.navigate('SignIn');
           },
         },

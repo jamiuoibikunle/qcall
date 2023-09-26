@@ -62,8 +62,16 @@ export default function App() {
               }}>
               <Stack.Screen name="Splash" component={SplashScreen} />
               <Stack.Screen name="Onboarding" component={Onboarding} />
-              <Stack.Screen name="SignUp" component={SignUp} />
-              <Stack.Screen name="SignIn" component={SignIn} />
+              <Stack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{headerLeft: () => null}}
+              />
+              <Stack.Screen
+                name="SignIn"
+                component={SignIn}
+                options={{headerLeft: () => null}}
+              />
               <Stack.Screen
                 name="Dashboard"
                 component={Dashboard}
