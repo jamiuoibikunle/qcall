@@ -44,8 +44,6 @@ export default function App() {
                 component={Dashboard}
                 options={{
                   headerShown: false,
-                  headerLeft: () => null,
-                  headerBackVisible: false,
                 }}
               />
               <Stack.Screen name="Profile" component={Profile} />

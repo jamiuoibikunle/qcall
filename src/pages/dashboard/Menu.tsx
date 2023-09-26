@@ -11,8 +11,11 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useSelector} from 'react-redux';
 
 const Menu = ({navigation}: any) => {
+  const {info} = useSelector((state: RootState) => state.user);
+
   return (
     <VStack alignItems="center" flex={1} px="$5" py="$10" gap="$10">
       <VStack alignItems="center" gap="$2">
@@ -23,7 +26,7 @@ const Menu = ({navigation}: any) => {
           borderRadius="$full">
           <Ionicons color="#d42e12" name="person-outline" size={22} />
         </Center>
-        <Heading>Ahmad Bashir</Heading>
+        <Heading>{info.firstName + ' ' + info.lastName || 'Guest'}</Heading>
         <Button variant="link" onPress={() => navigation.navigate('Profile')}>
           <Text color="#d42e12">Edit profile</Text>
         </Button>

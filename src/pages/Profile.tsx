@@ -219,7 +219,7 @@ const Profile = ({navigation}: any) => {
               });
 
               if (result.status == 200) {
-                return toast.show({
+                toast.show({
                   placement: 'bottom',
                   render: ({id}) => {
                     return (
@@ -235,28 +235,28 @@ const Profile = ({navigation}: any) => {
                     );
                   },
                 });
+
+                const handleFetch = async () => {
+                  if (token) {
+                    const {message} = await fetchUserDetails(token);
+                    dispatch(
+                      handleUpdateUserInfo({
+                        firstName: message.first_name,
+                        lastName: message.last_name,
+                        email: message.email,
+                        gender: message.gender,
+                        dateOfBirth: message.date_of_birth,
+                      }),
+                    );
+                  }
+                };
+
+                await handleFetch();
+
+                setTimeout(() => {
+                  navigation.navigate('Dashboard');
+                }, 2500);
               }
-
-              const handleFetch = async () => {
-                if (token) {
-                  const {message} = await fetchUserDetails(token);
-                  dispatch(
-                    handleUpdateUserInfo({
-                      firstName: message.first_name,
-                      lastName: message.last_name,
-                      email: message.email,
-                      gender: message.gender,
-                      dateOfBirth: message.date_of_birth,
-                    }),
-                  );
-                }
-              };
-
-              await handleFetch();
-
-              setTimeout(() => {
-                navigation.navigate('Dashboard');
-              }, 2500);
             }}>
             <Text color="white">Save Changes</Text>
           </Button>

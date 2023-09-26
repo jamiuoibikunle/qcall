@@ -21,7 +21,7 @@ import {
   View,
   useToast,
 } from '@gluestack-ui/themed';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {handleSignIn} from '../utils/handleSignIn';
 import {useDispatch} from 'react-redux';
@@ -30,6 +30,10 @@ import {handleUpdateToken} from '../features/slices/userSlice';
 const SignIn = ({navigation}: any) => {
   const toast = useToast();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // navigation.reset();
+  }, []);
 
   const [loading, setLoading] = useState(false);
 
@@ -77,7 +81,7 @@ const SignIn = ({navigation}: any) => {
               <InputField
                 defaultValue={password}
                 onChangeText={e => setPassword(e)}
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 placeholder=""
                 placeholderTextColor="#d42e12"
               />
@@ -109,6 +113,8 @@ const SignIn = ({navigation}: any) => {
                 email,
                 password,
               });
+
+              console.log(response);
 
               if (response.status == 400) {
                 setLoading(false);

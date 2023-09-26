@@ -270,7 +270,7 @@ const SignUp = ({navigation}: any) => {
                 password,
               });
 
-              if (submitted.message.includes('Duplicate')) {
+              if (submitted.message?.includes('Duplicate')) {
                 setLoading(false);
                 return toast.show({
                   placement: 'bottom',

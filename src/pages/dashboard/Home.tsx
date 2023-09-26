@@ -60,38 +60,6 @@ const Home = ({navigation}: any) => {
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
-      <Modal isOpen={isOpen}>
-        <ModalBody onClose={onClose}>
-          <VStack alignItems="center" gap="$4" w="$full">
-            <Heading fontWeight="500" color="#d42e12" fontSize="$2xl">
-              Call {details.person}
-            </Heading>
-            <VStack gap="$4" w="70%" alignItems="flex-start">
-              <Button
-                onPress={() => Linking.openURL(`tel:911`)}
-                gap="$5"
-                variant="link">
-                <Feather color="black" size={20} name="phone-call" />
-                <Text>Call with phone app</Text>
-              </Button>
-              <Button
-                onPress={() => Linking.openURL(`sms:911`)}
-                gap="$5"
-                variant="link">
-                <Feather color="black" size={20} name="message-square" />
-                <Text>Message with SMS</Text>
-              </Button>
-              <Button
-                onPress={() => Linking.openURL(`https:wa.me/911`)}
-                gap="$5"
-                variant="link">
-                <FontAwesome color="black" size={20} name="whatsapp" />
-                <Text>Message with WhatsApp</Text>
-              </Button>
-            </VStack>
-          </VStack>
-        </ModalBody>
-      </Modal>
       <VStack gap="$4" flex={1} p="$5">
         <HStack alignItems="center" gap="$3">
           <Button variant="link" onPress={() => navigation.navigate('Profile')}>
@@ -153,6 +121,38 @@ const Home = ({navigation}: any) => {
           w="100%"
         />
       </VStack>
+      <Modal isOpen={isOpen}>
+        <ModalBody onClose={onClose}>
+          <VStack alignItems="center" gap="$4" w="$full">
+            <Heading fontWeight="500" color="#d42e12" fontSize="$2xl">
+              Call {details.person}
+            </Heading>
+            <VStack gap="$4" w="70%" alignItems="flex-start">
+              <Button
+                onPress={() => Linking.openURL(`tel:911`)}
+                gap="$5"
+                variant="link">
+                <Feather color="black" size={20} name="phone-call" />
+                <Text>Call with phone app</Text>
+              </Button>
+              <Button
+                onPress={() => Linking.openURL(`sms:911`)}
+                gap="$5"
+                variant="link">
+                <Feather color="black" size={20} name="message-square" />
+                <Text>Message with SMS</Text>
+              </Button>
+              <Button
+                onPress={() => Linking.openURL(`https:wa.me/911`)}
+                gap="$5"
+                variant="link">
+                <FontAwesome color="black" size={20} name="whatsapp" />
+                <Text>Message with WhatsApp</Text>
+              </Button>
+            </VStack>
+          </VStack>
+        </ModalBody>
+      </Modal>
     </ScrollView>
   );
 };
