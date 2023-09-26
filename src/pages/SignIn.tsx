@@ -103,7 +103,7 @@ const SignIn = ({navigation}: any) => {
             </CheckboxLabel>
           </Checkbox>
           <Button
-            isDisabled={!email || !password}
+            isDisabled={!email || !password || loading}
             w="100%"
             bg="#d42e12"
             onPress={async () => {
@@ -113,8 +113,6 @@ const SignIn = ({navigation}: any) => {
                 email,
                 password,
               });
-
-              console.log(response);
 
               if (response.status == 400) {
                 setLoading(false);

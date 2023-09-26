@@ -16,16 +16,19 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import welcomeSlice from './slices/welcomeSlice';
 import userSlice from './slices/userSlice';
+import locationSlice from './slices/locationSlice';
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
   whiteList: ['welcome', 'user'],
+  blackList: ['location'],
 };
 
 const rootReducer = combineReducers({
   welcome: welcomeSlice,
   user: userSlice,
+  location: locationSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

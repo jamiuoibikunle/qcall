@@ -1,10 +1,7 @@
 import {
   Box,
   Button,
-  ButtonIcon,
-  ButtonText,
   Center,
-  CloseIcon,
   HStack,
   Heading,
   Icon,
@@ -14,7 +11,7 @@ import {
   VStack,
   View,
 } from '@gluestack-ui/themed';
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import ModalBody from '../../components/ModalBody';
@@ -27,10 +24,20 @@ import {fetchUserDetails} from '../../utils/fetchUserDetails';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../types/ReduxInterface';
 import {handleUpdateUserInfo} from '../../features/slices/userSlice';
+import {fetchLocation} from '../../utils/fetchLocation';
+import Geolocation from '@react-native-community/geolocation';
 
 const Home = ({navigation}: any) => {
   const dispatch = useDispatch();
   const {token, info} = useSelector((state: RootState) => state.user);
+
+  const [location, setLocation] = useState({
+    fetched: false,
+    county: '',
+    city: '',
+    state: '',
+    country: '',
+  });
 
   useEffect(() => {
     const handleFetch = async () => {
@@ -46,6 +53,22 @@ const Home = ({navigation}: any) => {
           }),
         );
       }
+
+      Geolocation.getCurrentPosition(
+        async ({coords: {latitude, longitude}}) => {
+          const {
+            components: {county, city, state, country},
+          } = await fetchLocation(`${latitude},${longitude}`);
+
+          setLocation({
+            fetched: true,
+            county,
+            city,
+            state,
+            country,
+          });
+        },
+      );
     };
 
     handleFetch();
@@ -77,7 +100,11 @@ const Home = ({navigation}: any) => {
             ) : (
               <Heading>Guest</Heading>
             )}
-            <Text>41'24'12.2"N 2'10'26.5"E</Text>
+            <Text numberOfLines={1}>
+              {location.fetched === false
+                ? 'Fetching location'
+                : `${location.county}, ${location.city}`}
+            </Text>
           </VStack>
           <Box alignSelf="flex-start">
             <SimpleLineIcons color="#d42e12" size={22} name="bell" />
@@ -89,12 +116,14 @@ const Home = ({navigation}: any) => {
         <VStack gap="$5">
           <HStack justifyContent="space-between" gap="$5">
             <Item
+              loaded={location.fetched}
               forwardDetails={forwardDetails}
               onOpen={onOpen}
               image={require('../../../public/health.png')}
               title="Health Emergency"
             />
             <Item
+              loaded={location.fetched}
               forwardDetails={forwardDetails}
               onOpen={onOpen}
               image={require('../../../public/fire.png')}
@@ -103,12 +132,14 @@ const Home = ({navigation}: any) => {
           </HStack>
           <HStack justifyContent="space-between" gap="$5">
             <Item
+              loaded={location.fetched}
               forwardDetails={forwardDetails}
               onOpen={onOpen}
               image={require('../../../public/police.png')}
               title="Health Emergency"
             />
             <Item
+              loaded={location.fetched}
               forwardDetails={forwardDetails}
               onOpen={onOpen}
               image={require('../../../public/more.png')}
@@ -162,11 +193,13 @@ const Item = ({
   title,
   onOpen,
   forwardDetails,
+  loaded,
 }: {
   image: any;
   title: string;
   onOpen: () => void;
   forwardDetails: (person: string, number: string) => void;
+  loaded: boolean;
 }) => {
   return (
     <Button
@@ -174,6 +207,7 @@ const Item = ({
         forwardDetails(title, '07088115563');
         onOpen();
       }}
+      isDisabled={!loaded}
       variant="link"
       flex={1}
       h="$40"

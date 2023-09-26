@@ -36,6 +36,8 @@ const Profile = ({navigation}: any) => {
   const dispatch = useDispatch();
   const {info, token} = useSelector((state: RootState) => state.user);
 
+  const [loading, setLoading] = useState(false);
+
   const [date, setDate] = useState(
     new Date(
       `${new Date(info.dateOfBirth).getFullYear()}-${new Date(
@@ -208,7 +210,10 @@ const Profile = ({navigation}: any) => {
           </FormControl>
           <Button
             bg="#d42e12"
+            isDisabled={loading}
             onPress={async () => {
+              setLoading(true);
+
               const result = await updateUserDetails({
                 token,
                 firstName,
@@ -257,6 +262,8 @@ const Profile = ({navigation}: any) => {
                   navigation.navigate('Dashboard');
                 }, 2500);
               }
+
+              setLoading(false);
             }}>
             <Text color="white">Save Changes</Text>
           </Button>

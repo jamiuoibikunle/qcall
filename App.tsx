@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -22,10 +22,35 @@ import NigeriaSecurityAndCivilDefence from './src/pages/NigeriaSecurityAndCivilD
 import PoliceForce from './src/pages/PoliceForce';
 import {persistor, store} from './src/features/configureStore';
 import {PersistGate} from 'redux-persist/integration/react';
+import {Alert, BackHandler, PermissionsAndroid} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  useEffect(() => {
+    const getPermission = async () => {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Geolocation Permission',
+          message: 'Can we access your location?',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+
+      if (granted !== 'granted') {
+        Alert.alert(
+          'Permission denied',
+          'You need to enable location to use this application.',
+          [{text: 'OK', onPress: () => getPermission()}],
+        );
+      }
+    };
+
+    getPermission();
+  }, []);
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
