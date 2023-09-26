@@ -13,13 +13,20 @@ import {ImageBackground} from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome6';
 import {useDispatch} from 'react-redux';
 import {markWelcomeAsFalse} from '../features/slices/welcomeSlice';
+import {CommonActions} from '@react-navigation/native';
 
 const Onboarding = ({navigation}: any) => {
   const [step, setStep] = useState(0);
 
   const handleNext = () => {
     if (step !== 2) setStep(step + 1);
-    else navigation.navigate('SignUp');
+    else
+      navigation.dispatch({
+        ...CommonActions.reset({
+          index: 0,
+          routes: [{name: 'SignUp'}],
+        }),
+      });
   };
 
   const handlePrevious = () => {
@@ -119,7 +126,7 @@ const StepTwo = ({
             justifyContent="flex-end"
             gap={50}
             p={24}>
-            {/* <Image source={require('../../public/splash01.png')} /> */}
+            <Image source={require('../../public/splash02.png')} />
             <Heading
               fontSize={36}
               fontWeight="500"

@@ -3,6 +3,7 @@ import {HStack, Image, Text, VStack, View} from '@gluestack-ui/themed';
 import {AnimatePresence, Motion} from '@legendapp/motion';
 import {useSelector} from 'react-redux';
 import {RootState} from '../types/ReduxInterface';
+import {CommonActions} from '@react-navigation/native';
 
 const SplashScreen = ({navigation}: any) => {
   const [step, setStep] = useState(0);
@@ -16,10 +17,25 @@ const SplashScreen = ({navigation}: any) => {
 
     setTimeout(() => {
       welcome
-        ? navigation.navigate('Onboarding')
+        ? navigation.dispatch({
+            ...CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Onboarding'}],
+            }),
+          })
         : token
-        ? navigation.navigate('Dashboard')
-        : navigation.navigate('SignIn');
+        ? navigation.dispatch({
+            ...CommonActions.reset({
+              index: 0,
+              routes: [{name: 'Dashboard'}],
+            }),
+          })
+        : navigation.dispatch({
+            ...CommonActions.reset({
+              index: 0,
+              routes: [{name: 'SignIn'}],
+            }),
+          });
     }, 4000);
   }, []);
 

@@ -103,7 +103,7 @@ const Home = ({navigation}: any) => {
             <Text numberOfLines={1}>
               {location.fetched === false
                 ? 'Fetching location'
-                : `${location.county}, ${location.city}`}
+                : `${location.county}, ${location.state}`}
             </Text>
           </VStack>
           <Box alignSelf="flex-start">
@@ -136,14 +136,14 @@ const Home = ({navigation}: any) => {
               forwardDetails={forwardDetails}
               onOpen={onOpen}
               image={require('../../../public/police.png')}
-              title="Health Emergency"
+              title="Police Emergency"
             />
             <Item
               loaded={location.fetched}
               forwardDetails={forwardDetails}
               onOpen={onOpen}
               image={require('../../../public/more.png')}
-              title="Fire Emergency"
+              title="More"
             />
           </HStack>
         </VStack>

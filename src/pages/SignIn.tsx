@@ -26,14 +26,11 @@ import Feather from 'react-native-vector-icons/Feather';
 import {handleSignIn} from '../utils/handleSignIn';
 import {useDispatch} from 'react-redux';
 import {handleUpdateToken} from '../features/slices/userSlice';
+import {CommonActions} from '@react-navigation/native';
 
 const SignIn = ({navigation}: any) => {
   const toast = useToast();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // navigation.reset();
-  }, []);
 
   const [loading, setLoading] = useState(false);
 
@@ -135,7 +132,12 @@ const SignIn = ({navigation}: any) => {
               } else if (response.status == 200) {
                 setLoading(false);
                 dispatch(handleUpdateToken(response.token));
-                return navigation.navigate('Dashboard');
+                return navigation.dispatch({
+                  ...CommonActions.reset({
+                    index: 0,
+                    routes: [{name: 'Dashboard'}],
+                  }),
+                });
               }
 
               setLoading(false);
@@ -161,7 +163,14 @@ const SignIn = ({navigation}: any) => {
           <Text>Or</Text>
           <Button
             variant="link"
-            onPress={() => navigation.navigate('Dashboard')}>
+            onPress={() => {
+              navigation.dispatch({
+                ...CommonActions.reset({
+                  index: 0,
+                  routes: [{name: 'Dashboard'}],
+                }),
+              });
+            }}>
             <Text color="#d42e12">Continue as a guest</Text>
           </Button>
           <HStack alignItems="center" gap="$1">
