@@ -7,7 +7,7 @@ import {RootState} from '../types/ReduxInterface';
 const SplashScreen = ({navigation}: any) => {
   const [step, setStep] = useState(0);
   const {welcome} = useSelector((state: RootState) => state.welcome);
-  const {userID, token} = useSelector((state: RootState) => state.user);
+  const {token} = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     setTimeout(() => {
@@ -17,7 +17,7 @@ const SplashScreen = ({navigation}: any) => {
     setTimeout(() => {
       welcome
         ? navigation.navigate('Onboarding')
-        : userID && token
+        : token
         ? navigation.navigate('Dashboard')
         : navigation.navigate('SignIn');
     }, 4000);
