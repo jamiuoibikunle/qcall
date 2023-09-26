@@ -27,7 +27,7 @@ app.use("/location", location);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-if (process.env.ENVIRONMENT !== "production") app.listen(process.env.PORT);
+// if (process.env.ENVIRONMENT !== "production") app.listen(process.env.PORT);
 
-// const handler = serverless(app);
-// export { handler };
+const handler = serverless(app);
+export { handler };

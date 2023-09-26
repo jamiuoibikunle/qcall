@@ -9,6 +9,8 @@ const registerUser = async (req: Request, res: Response) => {
     const { first_name, last_name, email, date_of_birth, gender, password } =
       req.body;
 
+    const lower_case_email = email.toLowerCase();
+
     if (
       !first_name ||
       !last_name ||
@@ -35,7 +37,14 @@ const registerUser = async (req: Request, res: Response) => {
 
     const result = await pool.query(
       "INSERT INTO users (first_name, last_name, email, date_of_birth, gender, password) VALUES ($1, $2, $3, $4, $5, $6)",
-      [first_name, last_name, email, date_of_birth, gender, hashedPassword]
+      [
+        first_name,
+        last_name,
+        lower_case_email,
+        date_of_birth,
+        gender,
+        hashedPassword,
+      ]
     );
     if (!result.rows)
       return res.status(400).json({
@@ -103,7 +112,7 @@ const loginUser = async (req: Request, res: Response) => {
       message: `Authenticated as ${email}`,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(400).json(error);
   }
 };
